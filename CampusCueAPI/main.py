@@ -1,7 +1,20 @@
 from fastapi import FastAPI
 from .routers import user,mess, schedule, satisfaction
+from .database import database
+from contextlib import asynccontextmanager
 
-app = FastAPI(title="CampusCue")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    print("Connecting to database...")
+    await database.connect()
+    yield
+    print("Disconnecting from database...")
+    await database.disconnect()
+
+app = FastAPI(
+    title="CampusCue",
+    lifespan=lifespan
+    )
 
 app.include_router(user.router, prefix="/users", tags=["Users"])
 app.include_router(mess.router, prefix = "/mess", tags=["Mess Menu"])
