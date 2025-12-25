@@ -1,0 +1,16 @@
+from pydantic import BaseModel, EmailStr
+from typing import Optional
+from datetime import date
+
+class User(BaseModel):
+    id: Optional[int] = None
+    email: EmailStr
+    full_name: str
+
+    mess_cycle: str
+
+    class Config:
+        form_attributes = True
+
+class UserIn(User):
+    password: str
