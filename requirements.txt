@@ -9,3 +9,5 @@ passlib[argon2]
 python-jose[cryptography]
 python-multipart
 rich
+psycopg2-binary
+asyncpg
