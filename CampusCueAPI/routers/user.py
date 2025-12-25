@@ -4,7 +4,6 @@ from fastapi.security import OAuth2PasswordRequestForm
 from ..database import database, users_table
 from ..models.user import User, UserIn
 from ..models.mess import MessPreferenceUpdate
-from datetime import date
 from ..security import get_user, get_password_hash, authenticate_user, create_access_token, get_current_user
 
 router = APIRouter()

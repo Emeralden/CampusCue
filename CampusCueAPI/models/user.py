@@ -1,6 +1,5 @@
 from pydantic import BaseModel, EmailStr
 from typing import Optional
-from datetime import date
 
 class User(BaseModel):
     id: Optional[int] = None

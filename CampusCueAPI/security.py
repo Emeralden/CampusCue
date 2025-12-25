@@ -4,7 +4,7 @@ from .database import database, users_table
 from .config import settings
 from fastapi import HTTPException, status, Depends
 from datetime import datetime, timedelta, timezone
-from jose import jwt, JWTError, ExpiredSignatureError
+from jose import jwt, JWTError
 from typing import Annotated
 from fastapi.security import OAuth2PasswordBearer
 
