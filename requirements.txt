@@ -4,6 +4,7 @@ SQLAlchemy
 databases[sqlite]
 python-dotenv
 pydantic-settings
+pydantic[email]
 passlib[bcrypt]
 python-jose[cryptography]
 rich
