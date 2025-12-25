@@ -12,7 +12,6 @@ users_table = sqlalchemy.Table (
     sqlalchemy.Column("email", sqlalchemy.String, unique=True, nullable=False),
     sqlalchemy.Column("full_name", sqlalchemy.String, nullable=False),
     sqlalchemy.Column("hashed_password", sqlalchemy.String, nullable=False),
-
     sqlalchemy.Column("mess_cycle", sqlalchemy.String, server_default="week_1_3", nullable=False),
 )
 
