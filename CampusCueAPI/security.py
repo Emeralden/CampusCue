@@ -1,6 +1,7 @@
 from passlib.context import CryptContext
 import logging
 from .database import database, users_table
+from .config import settings
 from fastapi import HTTPException, status, Depends
 from datetime import datetime, timedelta, timezone
 from jose import jwt, JWTError, ExpiredSignatureError
@@ -40,7 +41,7 @@ async def authenticate_user(email:str, password:str):
     logger.info("Authentication successful")
     return user
 
-SECRET_KEY = "a_super_secret_key_that_we_will_definitely_change_later_promise"
+SECRET_KEY = settings.secret_key
 ALGORITHM = "HS256"
 
 def create_access_token(data: dict):
