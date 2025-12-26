@@ -2,6 +2,8 @@ import logging
 import sqlalchemy
 from datetime import date
 from fastapi import APIRouter, Depends
+from typing import List
+from ..models.mess import MessMenuItem
 
 from ..database import database, mess_menu_items_table
 from ..models.user import User
@@ -39,4 +41,13 @@ async def get_my_menu(current_user: User = Depends(get_current_user)):
         "meals": meals
     }
 
-    
+
+@router.get("", response_model=List[MessMenuItem])
+async def get_full_menu_by_cycle(cycle: str):
+    logger.info(f"Fetching full menu...")
+
+    query = mess_menu_items_table.select().where(
+        mess_menu_items_table.c.cycle_type == cycle
+    )
+
+    return await database.fetch_all(query)

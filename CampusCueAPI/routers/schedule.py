@@ -1,12 +1,13 @@
 import logging
 import sqlalchemy
 from fastapi import APIRouter, Depends, status
+from datetime import date
+from typing import List
 
 from ..database import database, schedule_overrides_table, schedule_items_table
-from ..models.schedule import ScheduleOverride
+from ..models.schedule import ScheduleOverride, ScheduleItem
 from ..models.user import User
 from ..security import get_current_user
-from datetime import date
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -87,3 +88,15 @@ async def get_my_daily_schedule(
         "has_override": has_override,
         "items": items
     }
+
+@router.get("", response_model=List[ScheduleItem])
+async def get_master_schedule(day: str):
+    logger.info(f"Fetching Full schedule...")
+
+    query = (
+        schedule_items_table.select()
+        .where(schedule_items_table.c.day_of_week == day)
+        .order_by(schedule_items_table.c.start_time)
+    )
+    
+    return await database.fetch_all(query)
