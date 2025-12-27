@@ -2,14 +2,14 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import AuthGuard from './components/auth/AuthGuard';
-import LoginPage from './Pages/LoginPage';
-import Dashboard from './Pages/Dashboard';
-import FullMessMenu from './Pages/FullMessMenu';
-import FullSchedule from './Pages/FullSchedule';
-import SatisfactionCalendar from './Pages/SatisfactionCalendar';
-import TomorrowOverview from './Pages/TomorrowOverview';
-import Layout from './Layout';
+import AuthGuard from './Components/AuthGuard.jsx';
+import LoginPage from './Pages/LoginPage.jsx';
+import Dashboard from './Pages/Dashboard.jsx';
+import FullMessMenu from './Pages/FullMessMenu.jsx';
+import FullSchedule from './Pages/FullSchedule.jsx';
+import SatisfactionCalendar from './Pages/SatisfactionCalendar.jsx';
+import TomorrowOverview from './Pages/TomorrowOverview.jsx';
+import Layout from './Layout.jsx';
 
 const queryClient = new QueryClient();
 
