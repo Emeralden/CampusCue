@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { User, Mail, Lock, UserPlus, AlertCircle, CheckCircle } from 'lucide-react';
+import { User, Mail, Lock, UserPlus, AlertCircle, CheckCircle, Eye, EyeOff } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import apiClient from '@/apiClient';
 import { format } from 'date-fns';
@@ -14,6 +14,7 @@ export default function RegisterPage() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -147,14 +148,25 @@ export default function RegisterPage() {
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   minLength={6}
-                  className="w-full pl-12 pr-4 py-3 glass rounded-xl border border-gray-600/50 text-white placeholder-gray-500 focus:border-purple-400/50 focus:outline-none transition-all"
+                  className="w-full pl-12 pr-12 py-3 glass rounded-xl border border-gray-600/50 text-white placeholder-gray-500 focus:border-purple-400/50 focus:outline-none transition-all"
                   placeholder="••••••••"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 transition-colors focus:outline-none"
+                >
+                  {showPassword ? (
+                    <Eye className="w-5 h-5" />
+                  ) : (
+                    <EyeOff className="w-5 h-5" />
+                  )}
+                </button>
               </div>
               <p className="mt-2 text-xs text-gray-500">Must be at least 6 characters</p>
             </div>
