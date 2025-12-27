@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import apiClient from '@/apiClient';
 import { Mail, Lock } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom'
 
 const loginUser = async (credentials) => {
   const params = new URLSearchParams();
@@ -99,6 +100,13 @@ export default function LoginPage() {
           >
             {mutation.isLoading ? 'Signing In...' : 'Sign In'}
           </motion.button>
+
+          <p className="text-center text-sm text-gray-400 mt-6">
+            Don't have an account?{' '}
+            <Link to="/register" className="font-semibold text-purple-400 hover:text-purple-300">
+              Sign Up
+            </Link>
+          </p>
         </form>
       </motion.div>
     </div>

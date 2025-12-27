@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import AuthGuard from './Components/AuthGuard.jsx';
 import LoginPage from './Pages/LoginPage.jsx';
+import RegisterPage from './Pages/RegisterPage.jsx';
 import Dashboard from './Pages/Dashboard.jsx';
 import FullMessMenu from './Pages/FullMessMenu.jsx';
 import FullSchedule from './Pages/FullSchedule.jsx';
@@ -20,7 +21,7 @@ export default function App() {
         <Layout>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
-            
+            <Route path="/register" element={<RegisterPage />} />
             <Route 
               path="/" 
               element={
