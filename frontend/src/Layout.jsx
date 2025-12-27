@@ -37,10 +37,10 @@ export default function Layout({ children, currentPageName }) {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         
-        /* Custom scrollbar */
+
         ::-webkit-scrollbar {
           width: 6px;
-          height: 6px; /* Added height for horizontal scrollbar */
+          height: 6px;
         }
         
         ::-webkit-scrollbar-track {
@@ -52,16 +52,14 @@ export default function Layout({ children, currentPageName }) {
           border-radius: 3px;
         }
 
-        /* Hide scrollbar for specific elements */
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
         }
         .scrollbar-hide {
-          -ms-overflow-style: none; /* IE and Edge */
-          scrollbar-width: none; /* Firefox */
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
         
-        /* Glass morphism effect */
         .glass {
           background: rgba(255, 255, 255, 0.05);
           backdrop-filter: blur(10px);
@@ -69,7 +67,6 @@ export default function Layout({ children, currentPageName }) {
           border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* Neon glow effects */
         .neon-glow-blue {
           box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
         }
@@ -90,7 +87,6 @@ export default function Layout({ children, currentPageName }) {
           box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
         }
         
-        /* Animation for pulse effect */
         @keyframes neon-pulse-blue {
           0%, 100% { box-shadow: 0 0 10px rgba(0, 212, 255, 0.3); }
           50% { box-shadow: 0 0 25px rgba(0, 212, 255, 0.6); }
@@ -109,7 +105,6 @@ export default function Layout({ children, currentPageName }) {
             animation: neon-pulse-yellow 2s infinite;
         }
 
-        /* New Animations for Active/Ongoing state */
         @keyframes active-border-glow-blue {
           0% { border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); }
           50% { border-color: rgba(56, 189, 248, 0.8); box-shadow: 0 0 25px rgba(56, 189, 248, 0.5); }

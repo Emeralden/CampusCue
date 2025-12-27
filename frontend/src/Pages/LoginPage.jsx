@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { Mail, Lock, LogIn, AlertCircle } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import apiClient from '@/apiClient';
-import { Mail, Lock } from 'lucide-react';
-import { useNavigate, Link } from 'react-router-dom'
 
 const loginUser = async (credentials) => {
   const params = new URLSearchParams();
@@ -20,94 +18,143 @@ const loginUser = async (credentials) => {
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const mutation = useMutation({
-    mutationFn: loginUser,
-    onSuccess: (data) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
+
+    try {
+      const data = await loginUser({ email, password });
       localStorage.setItem('accessToken', data.access_token);
       navigate('/');
-    },
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    mutation.mutate({ email, password });
+    } catch (err) {
+      setError('Incorrect email or password.');
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4 py-8">
       <motion.div
-        initial={{ opacity: 0, y: -20, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.5, type: 'spring' }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
         className="w-full max-w-md"
       >
-        <form 
-          onSubmit={handleSubmit}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.1 }}
+          className="text-center mb-8"
+        >
+          <motion.div
+            animate={{ rotate: [0, 10, -10, 0] }}
+            transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+            className="text-6xl mb-4"
+          >
+            👋
+          </motion.div>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent mb-2">
+            Welcome Champ!
+          </h1>
+          <p className="text-gray-400">Sign in to continue</p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
           className="glass rounded-3xl p-8 border border-purple-400/30 shadow-2xl neon-glow-purple"
         >
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent mb-2">
-              Welcome to CampusCue
-            </h1>
-            <p className="text-gray-400">Please sign in to continue</p>
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                Email Address
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full pl-12 pr-4 py-3 glass rounded-xl border border-gray-600/50 text-white placeholder-gray-500 focus:border-purple-400/50 focus:outline-none transition-all"
+                  placeholder="you@example.com"
+                />
+              </div>
+            </div>
 
-          {mutation.isError && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="mb-4 p-3 bg-red-500/20 border border-red-400/50 rounded-xl text-center"
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                Password
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="w-full pl-12 pr-4 py-3 glass rounded-xl border border-gray-600/50 text-white placeholder-gray-500 focus:border-purple-400/50 focus:outline-none transition-all"
+                  placeholder="••••••••"
+                />
+              </div>
+            </div>
+
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2 p-3 glass rounded-xl border border-red-400/50 bg-red-500/10"
+              >
+                <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
+                <p className="text-sm text-red-300">{error}</p>
+              </motion.div>
+            )}
+
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-4 rounded-xl font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed neon-glow-purple flex items-center justify-center gap-2"
             >
-              <p className="text-red-300 font-medium text-sm">
-                Incorrect email or password.
-              </p>
-            </motion.div>
-          )}
+              {isLoading ? (
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+                />
+              ) : (
+                <>
+                  <LogIn className="w-5 h-5" />
+                  <span>Sign In</span>
+                </>
+              )}
+            </motion.button>
+          </form>
 
-          <div className="space-y-6">
-            <div className="relative">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full pl-12 pr-4 py-3 glass rounded-xl border border-gray-600/50 text-white focus:border-purple-400/50 focus:outline-none transition-all"
-              />
-            </div>
-            <div className="relative">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full pl-12 pr-4 py-3 glass rounded-xl border border-gray-600/50 text-white focus:border-purple-400/50 focus:outline-none transition-all"
-              />
-            </div>
-          </div>
-          
-          <motion.button
-            type="submit"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            disabled={mutation.isLoading}
-            className="w-full mt-8 px-6 py-4 rounded-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:from-purple-500 hover:to-pink-500 transition-all text-lg neon-glow-purple"
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="mt-6 text-center"
           >
-            {mutation.isLoading ? 'Signing In...' : 'Sign In'}
-          </motion.button>
-
-          <p className="text-center text-sm text-gray-400 mt-6">
-            Don't have an account?{' '}
-            <Link to="/register" className="font-semibold text-purple-400 hover:text-purple-300">
-              Sign Up
-            </Link>
-          </p>
-        </form>
+            <p className="text-gray-400">
+              Don't have an account?{' '}
+              <Link
+                to="/register"
+                className="text-purple-400 hover:text-purple-300 font-semibold transition-colors"
+              >
+                Sign Up
+              </Link>
+            </p>
+          </motion.div>
+        </motion.div>
       </motion.div>
     </div>
   );
