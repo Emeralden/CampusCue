@@ -280,7 +280,7 @@ SCHEDULE_DATA = [
     
     # Thursday
     {"day_of_week": "thursday", "item_type": "class", "name": "Microcontrollers", "room": "L103", "start_time": time(8, 30), "end_time": time(9, 30)},
-    {"day_of_week": "thursday", "item_type": "lab", "name": "Control Lab", "room": "PoCo, ED1 Lvl-2", "start_time": time(9, 30), "end_time": time(12, 30)},
+    {"day_of_week": "thursday", "item_type": "lab", "name": "Control Lab", "room": "PoCo, ED1 Lvl-3", "start_time": time(9, 30), "end_time": time(12, 30)},
     {"day_of_week": "thursday", "item_type": "lab", "name": "Instrumentation Lab", "room": "SID, ED1 Lvl-2", "start_time": time(14, 30), "end_time": time(17, 30)},
     
     # Friday
