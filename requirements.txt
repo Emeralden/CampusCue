@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+SQLAlchemy
+databases[sqlite]
+python-dotenv
+pydantic-settings
+pydantic[email]
+passlib[argon2]
+python-jose[cryptography]
+python-multipart
+rich
+psycopg2-binary
+asyncpg

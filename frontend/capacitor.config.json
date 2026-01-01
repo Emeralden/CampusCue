@@ -1,0 +1,6 @@
+{
+  "appId": "com.campuscue.app",
+  "appName": "CampusCue",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
