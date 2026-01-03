@@ -5,9 +5,8 @@ class User(BaseModel):
     id: Optional[int] = None
     email: EmailStr
     full_name: str
-
     mess_cycle: str
-
+    diet_type: str
     class Config:
         form_attributes = True
 
@@ -16,3 +15,6 @@ class UserIn(User):
 
 class TokenRefresh(BaseModel):
     refresh_token: str
+
+class DietTypeUpdate(BaseModel):
+    diet_type: str

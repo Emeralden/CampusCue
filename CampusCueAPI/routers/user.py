@@ -2,7 +2,7 @@ import logging
 from fastapi import APIRouter, HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 from ..database import database, users_table
-from ..models.user import User, UserIn, TokenRefresh
+from ..models.user import User, UserIn, TokenRefresh, DietTypeUpdate
 from ..security import get_user, get_password_hash, authenticate_user, create_access_token, get_current_user, create_refresh_token, get_current_user_from_refresh_token
 
 router = APIRouter()
@@ -79,6 +79,22 @@ async def toggle_mess_cycle(current_user: User = Depends(get_current_user)):
         users_table.update()
         .where(users_table.c.id == current_user.id)
         .values(mess_cycle=new_cycle)
+    )
+    await database.execute(update_query)
+
+    return await get_user(current_user.email)
+
+@router.patch("/me/diet-preference", response_model=User)
+async def update_diet_preference(
+    preference: DietTypeUpdate,
+    current_user: User = Depends(get_current_user),
+):
+    logger.info(f"User {current_user.email} setting diet preference to {preference.diet_type}")
+
+    update_query = (
+        users_table.update()
+        .where(users_table.c.id == current_user.id)
+        .values(diet_type=preference.diet_type)
     )
     await database.execute(update_query)
 
