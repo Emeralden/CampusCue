@@ -12,6 +12,7 @@ users_table = sqlalchemy.Table (
     sqlalchemy.Column("email", sqlalchemy.String, unique=True, nullable=False),
     sqlalchemy.Column("full_name", sqlalchemy.String, nullable=False),
     sqlalchemy.Column("hashed_password", sqlalchemy.String, nullable=False),
+    sqlalchemy.Column("hashed_refresh_token", sqlalchemy.String, nullable=True),
     sqlalchemy.Column("mess_cycle", sqlalchemy.String, server_default="week_2_4", nullable=False),
 )
 
