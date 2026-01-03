@@ -31,6 +31,7 @@ export default function LoginPage() {
     try {
       const data = await loginUser({ email, password });
       localStorage.setItem('accessToken', data.access_token);
+      localStorage.setItem('refreshToken', data.refresh_token);
       navigate('/');
     } catch (err) {
       setError('Incorrect email or password.');

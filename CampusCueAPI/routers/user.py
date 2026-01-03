@@ -47,6 +47,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
         users_table.update()
         .where(users_table.c.id == user["id"])
         .values(hashed_refresh_token=hashed_refresh_token)
+        .returning(users_table.c.id, users_table.c.email)
     )
     await database.execute(update_query)
 
