@@ -62,6 +62,11 @@ export default function Dashboard() {
     queryClient.invalidateQueries({ queryKey: ['satisfactionHistory'] });
   };
 
+  const handleCancelPrompt = () => {
+  setShowSatisfactionModal(false);
+  setPromptDate(null);
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center">
@@ -89,6 +94,7 @@ export default function Dashboard() {
           <SatisfactionModal 
             date={promptDate}
             onSuccess={handleMoodLogged}
+            onCancel={handleCancelPrompt}
           />
         )}
       </AnimatePresence>
