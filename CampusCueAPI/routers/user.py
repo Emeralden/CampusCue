@@ -2,8 +2,8 @@ import logging
 from fastapi import APIRouter, HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 from ..database import database, users_table
-from ..models.user import User, UserIn
-from ..security import get_user, get_password_hash, authenticate_user, create_access_token, get_current_user
+from ..models.user import User, UserIn, TokenRefresh
+from ..security import get_user, get_password_hash, authenticate_user, create_access_token, get_current_user, create_refresh_token, get_current_user_from_refresh_token
 
 router = APIRouter()
 
@@ -35,21 +35,34 @@ async def register(user: UserIn):
 
     return {"detail": "User created successfully!"}
 
-
 @router.post("/token")
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     user = await authenticate_user(email=form_data.username, password=form_data.password)
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect email or Password",
-            headers={"WWW-Authenticate":"Bearer"}
-        )
     
     access_token = create_access_token(data={"sub": user["email"]})
+    refresh_token = create_refresh_token(data={"sub": user["email"]})
 
-    return {"access_token":access_token, "token_type":"bearer"}
+    hashed_refresh_token = get_password_hash(refresh_token)
+    update_query = (
+        users_table.update()
+        .where(users_table.c.id == user["id"])
+        .values(hashed_refresh_token=hashed_refresh_token)
+    )
+    await database.execute(update_query)
 
+    return {
+        "access_token": access_token,
+        "refresh_token": refresh_token,
+        "token_type": "bearer"
+    }
+
+@router.post("/token/refresh")
+async def refresh_access_token(refresh: TokenRefresh):
+    user = await get_current_user_from_refresh_token(refresh.refresh_token)
+    
+    access_token = create_access_token(data={"sub": user["email"]})
+    
+    return {"access_token": access_token, "token_type": "bearer"}
 
 @router.get("/me", response_model=User)
 async def get_me(current_user: User = Depends(get_current_user)):

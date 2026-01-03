@@ -13,3 +13,6 @@ class User(BaseModel):
 
 class UserIn(User):
     password: str
+
+class TokenRefresh(BaseModel):
+    refresh_token: str
