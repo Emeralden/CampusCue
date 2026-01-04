@@ -12,7 +12,10 @@ users_table = sqlalchemy.Table (
     sqlalchemy.Column("email", sqlalchemy.String, unique=True, nullable=False),
     sqlalchemy.Column("full_name", sqlalchemy.String, nullable=False),
     sqlalchemy.Column("hashed_password", sqlalchemy.String, nullable=False),
+    sqlalchemy.Column("hashed_refresh_token", sqlalchemy.String, nullable=True),
     sqlalchemy.Column("mess_cycle", sqlalchemy.String, server_default="week_2_4", nullable=False),
+    sqlalchemy.Column("diet_type", sqlalchemy.String, server_default="veg", nullable=False),
+    sqlalchemy.Column("enable_satisfaction_prompt", sqlalchemy.Boolean, server_default="false", nullable=False),
 )
 
 mess_menu_items_table = sqlalchemy.Table (
@@ -20,12 +23,13 @@ mess_menu_items_table = sqlalchemy.Table (
     metadata,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("cycle_type", sqlalchemy.String, nullable=False),
+    sqlalchemy.Column("menu_type", sqlalchemy.String, nullable=False),
     sqlalchemy.Column("day_of_week", sqlalchemy.String, nullable=False),
     sqlalchemy.Column("meal_type", sqlalchemy.String, nullable=False),
     sqlalchemy.Column("description", sqlalchemy.Text, nullable=False),
     
     sqlalchemy.UniqueConstraint(
-        "cycle_type", "day_of_week", "meal_type", name="uq_mess_menu_item"  
+        "cycle_type", "day_of_week", "meal_type", "menu_type", name="uq_mess_menu_item"  
         )
     )
 

@@ -5,12 +5,12 @@ venv/
 .env*
 !.env.example
 
-__pyacache__/
+__pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-.db
+*.db
 *.sqlite3
 
 google-services.json
