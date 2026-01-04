@@ -87,6 +87,10 @@ export default function Layout({ children, currentPageName }) {
           box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
         }
         
+        .neon-glow-orange {
+          box-shadow: 0 0 20px rgba(251, 146, 60, 0.3);
+        }
+        
         @keyframes neon-pulse-blue {
           0%, 100% { box-shadow: 0 0 10px rgba(0, 212, 255, 0.3); }
           50% { box-shadow: 0 0 25px rgba(0, 212, 255, 0.6); }

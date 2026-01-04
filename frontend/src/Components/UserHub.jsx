@@ -42,11 +42,11 @@ export default function UserHub() {
       onClick: () => navigate('/satisfaction'),
       color: 'text-purple-400'
     },
-    {
-      icon: Settings,
-      label: 'Settings',
-      onClick: () => {},
-      color: 'text-gray-400'
+    { 
+      icon: Settings, 
+      label: 'Settings', 
+      onClick: () => navigate('/settings'), 
+      color: 'text-gray-400' 
     },
     {
       icon: LogOut,

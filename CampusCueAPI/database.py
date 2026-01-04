@@ -14,7 +14,8 @@ users_table = sqlalchemy.Table (
     sqlalchemy.Column("hashed_password", sqlalchemy.String, nullable=False),
     sqlalchemy.Column("hashed_refresh_token", sqlalchemy.String, nullable=True),
     sqlalchemy.Column("mess_cycle", sqlalchemy.String, server_default="week_2_4", nullable=False),
-    sqlalchemy.Column("diet_type", sqlalchemy.String, server_default="veg", nullable=False)
+    sqlalchemy.Column("diet_type", sqlalchemy.String, server_default="veg", nullable=False),
+    sqlalchemy.Column("enable_satisfaction_prompt", sqlalchemy.Boolean, server_default="false", nullable=False),
 )
 
 mess_menu_items_table = sqlalchemy.Table (

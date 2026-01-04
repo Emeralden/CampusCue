@@ -10,6 +10,7 @@ import FullMessMenu from './Pages/FullMessMenu.jsx';
 import FullSchedule from './Pages/FullSchedule.jsx';
 import SatisfactionCalendar from './Pages/SatisfactionCalendar.jsx';
 import TomorrowOverview from './Pages/TomorrowOverview.jsx';
+import SettingsPage from './Pages/SettingsPage.jsx';
 import Layout from './Layout.jsx';
 
 const queryClient = new QueryClient();
@@ -61,6 +62,14 @@ export default function App() {
                   <TomorrowOverview />
                 </AuthGuard>
               } 
+            />
+            <Route 
+              path="/settings" 
+              element={
+                <AuthGuard>
+                  <SettingsPage />
+                </AuthGuard>
+              }
             />
           </Routes>
         </Layout>

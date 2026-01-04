@@ -2,7 +2,7 @@ import logging
 from fastapi import APIRouter, HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 from ..database import database, users_table
-from ..models.user import User, UserIn, TokenRefresh, DietTypeUpdate
+from ..models.user import User, UserIn, TokenRefresh, UserProfileUpdate
 from ..security import get_user, get_password_hash, authenticate_user, create_access_token, get_current_user, create_refresh_token, get_current_user_from_refresh_token
 
 router = APIRouter()
@@ -11,9 +11,6 @@ logger = logging.getLogger(__name__)
 
 @router.post("/register", status_code=status.HTTP_201_CREATED)
 async def register(user: UserIn):
-    """
-    Registers a new user in the system.
-    """
     if await get_user(user.email):
         logger.warning(f"Registartion attempt for existing email:{user.email}")
         raise HTTPException(
@@ -27,7 +24,8 @@ async def register(user: UserIn):
         email=user.email,
         full_name=user.full_name,
         hashed_password=hashed_password,
-        mess_cycle=user.mess_cycle
+        mess_cycle=user.mess_cycle,
+        enable_satisfaction_prompt=False,
     )
 
     logger.info(f"Creating new user: {user.email}")
@@ -84,17 +82,37 @@ async def toggle_mess_cycle(current_user: User = Depends(get_current_user)):
 
     return await get_user(current_user.email)
 
-@router.patch("/me/diet-preference", response_model=User)
-async def update_diet_preference(
-    preference: DietTypeUpdate,
-    current_user: User = Depends(get_current_user),
-):
-    logger.info(f"User {current_user.email} setting diet preference to {preference.diet_type}")
+@router.post("/me/toggle-diet", response_model=User)
+async def toggle_dietary_preference(current_user: User = Depends(get_current_user)):
+    logger.info(f"User {current_user.email} toggling dietary preference.")
+
+    new_diet = "non_veg" if current_user.diet_type == "veg" else "veg"
 
     update_query = (
         users_table.update()
         .where(users_table.c.id == current_user.id)
-        .values(diet_type=preference.diet_type)
+        .values(diet_type=new_diet)
+    )
+    await database.execute(update_query)
+
+    return await get_user(current_user.email)
+
+@router.patch("/me/profile", response_model=User)
+async def update_user_profile(
+    update_data: UserProfileUpdate,
+    current_user: User = Depends(get_current_user),
+):
+    update_values = update_data.model_dump(exclude_unset=True)
+
+    if not update_values:
+        return current_user
+
+    logger.info(f"User {current_user.email} updating profile with: {update_values}")
+
+    update_query = (
+        users_table.update()
+        .where(users_table.c.id == current_user.id)
+        .values(**update_values)
     )
     await database.execute(update_query)
 

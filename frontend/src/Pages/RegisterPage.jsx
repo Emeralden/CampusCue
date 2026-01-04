@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { User, Mail, Lock, UserPlus, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import DietaryChoice from '../Components/DietaryChoice.jsx'
+import { useQuery } from '@tanstack/react-query';
 import apiClient from '@/apiClient';
-import { format } from 'date-fns';
 
 const registerUser = async (userData) => {
   const { data } = await apiClient.post('/users/register', userData);
+  return data;
+};
+
+const fetchCurrentUser = async () => {
+  const { data } = await apiClient.get('/users/me');
   return data;
 };
 
@@ -18,7 +24,14 @@ export default function RegisterPage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const navigate = useNavigate();
+
+  const { data: currentUser } = useQuery({
+      queryKey: ['currentUser'],
+      queryFn: fetchCurrentUser,
+      enabled: showOnboarding
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,8 +44,8 @@ export default function RegisterPage() {
         email: email,
         password: password,
         mess_cycle: "weeks_2_4",
-        last_cycle_update: format(new Date(), 'yyyy-MM-dd'),
-        manual_cycle_override: false
+        diet_type: "veg",
+        enable_satisfaction_prompt: false
       };
 
       await registerUser(registrationData);
@@ -50,7 +63,7 @@ export default function RegisterPage() {
       setSuccess(true);
       
       setTimeout(() => {
-        navigate('/');
+        setShowOnboarding(true);
       }, 2250);
 
     } catch (err) {
@@ -61,184 +74,147 @@ export default function RegisterPage() {
     }
   };
 
-  if (success) {
-    return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4 py-8">
+  return (
+    <AnimatePresence mode="wait">
+      {showOnboarding && currentUser ? (
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-center glass rounded-3xl p-12 border border-purple-400/50 neon-glow-purple max-w-md"
+          key="onboarding"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="min-h-screen bg-gray-900 flex items-center justify-center px-4 py-8"
         >
           <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: 'spring', stiffness: 150, damping: 10 }}
-            className="text-7xl mb-6"
-          >
-            💀🔥
-          </motion.div>
-          <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15 }}
-            className="text-5xl font-black bg-gradient-to-r from-purple-400 via-pink-500 to-orange-500 bg-clip-text text-transparent mb-4"
+            className="w-full max-w-md text-center glass rounded-3xl p-8 border border-purple-400/30 shadow-2xl neon-glow-purple"
           >
-            You're in!
-          </motion.h2>
-        </motion.div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4 py-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-md"
-      >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.1 }}
-          className="text-center mb-8"
-        >
-          <motion.div
-            animate={{ rotate: [0, 10, -10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-            className="text-6xl mb-4"
-          >
-            🎓
-          </motion.div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-2">
-            Join CampusCue
-          </h1>
-          <p className="text-gray-400">Create your account</p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="glass rounded-3xl p-8 border border-purple-400/30 shadow-2xl neon-glow-purple"
-        >
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Full Name
-              </label>
-              <div className="relative">
-                <User className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="text"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  required
-                  className="w-full pl-12 pr-4 py-3 glass rounded-xl border border-gray-600/50 text-white placeholder-gray-500 focus:border-purple-400/50 focus:outline-none transition-all"
-                  placeholder="Bruce Wayne"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Email Address
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="w-full pl-12 pr-4 py-3 glass rounded-xl border border-gray-600/50 text-white placeholder-gray-500 focus:border-purple-400/50 focus:outline-none transition-all"
-                  placeholder="you@example.com"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  minLength={6}
-                  className="w-full pl-12 pr-12 py-3 glass rounded-xl border border-gray-600/50 text-white placeholder-gray-500 focus:border-purple-400/50 focus:outline-none transition-all"
-                  placeholder="••••••••"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 transition-colors focus:outline-none"
-                >
-                  {showPassword ? (
-                    <Eye className="w-5 h-5" />
-                  ) : (
-                    <EyeOff className="w-5 h-5" />
-                  )}
-                </button>
-              </div>
-              <p className="mt-2 text-xs text-gray-500">Must be at least 6 characters</p>
-            </div>
-
-            {error && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-2 p-3 glass rounded-xl border border-red-400/50 bg-red-500/10"
-              >
-                <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
-                <p className="text-sm text-red-300">{error}</p>
-              </motion.div>
-            )}
-
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              type="submit"
-              disabled={isLoading}
-              className="w-full py-4 rounded-xl font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed neon-glow-purple flex items-center justify-center gap-2"
-            >
-              {isLoading ? (
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
-                />
-              ) : (
-                <>
-                  <UserPlus className="w-5 h-5" />
-                  <span>Create Account</span>
-                </>
-              )}
-            </motion.button>
-          </form>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="mt-6 text-center"
-          >
-            <p className="text-gray-400">
-              Already have an account?{' '}
-              <Link
-                to="/login"
-                className="text-purple-400 hover:text-purple-300 font-semibold transition-colors"
-              >
-                Sign In
-              </Link>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-4">
+              One Last Step...
+            </h1>
+            <p className="text-gray-400 mb-8">
+              What do you eat?
             </p>
+            <DietaryChoice currentUser={currentUser} onComplete={() => navigate('/')} showButton={true} />
           </motion.div>
         </motion.div>
-      </motion.div>
-    </div>
+      ) : success ? (
+        <div key="success" className="min-h-screen bg-gray-900 flex items-center justify-center px-4 py-8">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-center glass rounded-3xl p-12 border border-purple-400/50 neon-glow-purple max-w-md"
+          >
+            <motion.div
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ type: 'spring', stiffness: 150, damping: 10 }}
+              className="text-7xl mb-6"
+            >
+              💀🔥
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 }}
+              className="text-5xl font-black bg-gradient-to-r from-purple-400 via-pink-500 to-orange-500 bg-clip-text text-transparent mb-4"
+            >
+              You're in!
+            </motion.h2>
+          </motion.div>
+        </div>
+      ) : (
+        <div key="form" className="min-h-screen bg-gray-900 flex items-center justify-center px-4 py-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="w-full max-w-md"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.1 }}
+              className="text-center mb-8"
+            >
+              <motion.div
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                className="text-6xl mb-4"
+              >
+                🎓
+              </motion.div>
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-2">
+                Join CampusCue
+              </h1>
+              <p className="text-gray-400">Create your account</p>
+            </motion.div>
+    
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="glass rounded-3xl p-8 border border-purple-400/30 shadow-2xl neon-glow-purple"
+            >
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Full Name
+                  </label>
+                  <div className="relative">
+                    <User className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} required className="w-full pl-12 pr-4 py-3 glass rounded-xl border border-gray-600/50 text-white placeholder-gray-500 focus:border-purple-400/50 focus:outline-none transition-all" placeholder="Bruce Wayne" />
+                  </div>
+                </div>
+    
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Email Address
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="w-full pl-12 pr-4 py-3 glass rounded-xl border border-gray-600/50 text-white placeholder-gray-500 focus:border-purple-400/50 focus:outline-none transition-all" placeholder="you@example.com" />
+                  </div>
+                </div>
+    
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Password
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} className="w-full pl-12 pr-12 py-3 glass rounded-xl border border-gray-600/50 text-white placeholder-gray-500 focus:border-purple-400/50 focus:outline-none transition-all" placeholder="••••••••" />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 transition-colors focus:outline-none">
+                      {showPassword ? ( <Eye className="w-5 h-5" /> ) : ( <EyeOff className="w-5 h-5" /> )}
+                    </button>
+                  </div>
+                  <p className="mt-2 text-xs text-gray-500">Must be at least 6 characters</p>
+                </div>
+    
+                {error && (
+                  <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-2 p-3 glass rounded-xl border border-red-400/50 bg-red-500/10">
+                    <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
+                    <p className="text-sm text-red-300">{error}</p>
+                  </motion.div>
+                )}
+    
+                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} type="submit" disabled={isLoading} className="w-full py-4 rounded-xl font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed neon-glow-purple flex items-center justify-center gap-2">
+                  {isLoading ? ( <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="w-5 h-5 border-2 border-white border-t-transparent rounded-full" /> ) : ( <> <UserPlus className="w-5 h-5" /> <span>Create Account</span> </> )}
+                </motion.button>
+              </form>
+    
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="mt-6 text-center">
+                <p className="text-gray-400">
+                  Already have an account?{' '}
+                  <Link to="/login" className="text-purple-400 hover:text-purple-300 font-semibold transition-colors">
+                    Sign In
+                  </Link>
+                </p>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
   );
 }
