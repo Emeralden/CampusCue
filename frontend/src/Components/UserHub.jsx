@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, TrendingUp, LogOut, MoreVertical, Repeat } from 'lucide-react';
+import { Settings, TrendingUp, LogOut, SlidersHorizontal, Repeat } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
@@ -64,7 +64,7 @@ export default function UserHub() {
         onClick={() => setIsOpen(!isOpen)}
         className="p-2 text-gray-400 hover:text-white transition-colors"
       >
-        <MoreVertical className="w-5 h-5 text-gray-300" />
+        <SlidersHorizontal className="w-6 h-6 text-gray-300" />
       </motion.button>
 
       <AnimatePresence>

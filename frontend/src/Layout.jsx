@@ -129,7 +129,7 @@ export default function Layout({ children, currentPageName }) {
           animation: active-border-glow-yellow 2s infinite ease-in-out;
         }
       `}</style>
-      {children}
+      <main className="px-4 py-6 max-w-4xl mx-auto">{children}</main>
     </div>
   );
 }

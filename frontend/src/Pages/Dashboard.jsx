@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TimeBasedGreeting from '../Components/TimeBasedGreeting';
 import CurrentDayOverview from '../Components/CurrentDayOverview';
 import SatisfactionModal from '../Components/SatisfactionModal';
+import UserHub from '../Components/UserHub.jsx';
 import apiClient from '@/apiClient';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { format, subDays } from 'date-fns';
@@ -90,7 +91,10 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 px-4 py-8">
+    <div className="min-h-screen bg-gray-900 px-4 py-8 relative">
+      <div className="absolute top-2 left-2 z-10">
+        <UserHub />
+      </div>
       <div className="max-w-2xl mx-auto space-y-10">
         <TimeBasedGreeting />
         <CurrentDayOverview />
