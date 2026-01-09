@@ -19,7 +19,7 @@ users_table = sqlalchemy.Table (
 )
 
 mess_menu_items_table = sqlalchemy.Table (
-    "mess_menu_tems",
+    "mess_menu_items",
     metadata,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("cycle_type", sqlalchemy.String, nullable=False),

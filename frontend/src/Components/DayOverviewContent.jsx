@@ -155,7 +155,7 @@ export default function DayOverviewContent({ dayOffset = 0, showTimeAndStatus = 
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} drag="x" dragConstraints={{ left: 0, right: 0 }} onDragEnd={handleMenuSwipe} whileDrag={{ scale: 1.02 }} className="space-y-6 cursor-grab active:cursor-grabbing">
         <div className="text-center mb-6 relative">
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent inline-block">
+          <h2 className="text-[1.7rem] font-bold bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent inline-block">
             {dayOffset === 0 ? "Today's Menu" : "Tomorrow's Menu"}
           </h2>
           <Link to="/mess-menu" className="absolute top-1/2 -translate-y-1/2 ml-2">
@@ -169,17 +169,17 @@ export default function DayOverviewContent({ dayOffset = 0, showTimeAndStatus = 
             const IconComponent = meal.icon;
             const styles = getStatusStyles(meal.status, 'meal');
             return (
-              <motion.div key={meal.name} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} className={`p-5 rounded-2xl transition-all ${styles.bg}`}>
+              <motion.div key={meal.name} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} className={`p-6 rounded-2xl transition-all ${styles.bg}`}>
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-4">
-                    <IconComponent className={`w-7 h-7 mt-1 ${styles.text}`} />
+                    <IconComponent className={`w-7 h-7 mt-1 flex-shrink-0 ${styles.text}`} />
                     <div>
-                      <h3 className={`text-xl font-bold ${styles.text}`}>{meal.name}</h3>
-                      <p className="text-gray-400 font-medium text-sm mb-2">{meal.time}</p>
-                      {meal.item && (<div><p className="text-gray-200 font-medium leading-relaxed">{meal.item}</p></div>)}
+                      <h3 className={`text-2xl font-semibold ${styles.text}`}>{meal.name}</h3>
+                      <p className="text-gray-400 font-medium mb-2">{meal.time}</p>
+                      {meal.item && (<div><p className="text-gray-200 font-medium leading-relaxed text-lg">{meal.item}</p></div>)}
                     </div>
                   </div>
-                  {showTimeAndStatus && meal.status !== 'upcoming' && (<div className={`flex items-center justify-center flex-shrink-0 px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide ${styles.badge}`}>{meal.status === 'completed' ? "Burp!" : "Serving"}</div>)}
+                  {showTimeAndStatus && meal.status !== 'upcoming' && (<div className={`flex items-center justify-center flex-shrink-0 px-4 py-2 rounded-full text-base font-bold uppercase tracking-wide ${styles.badge}`}>{meal.status === 'completed' ? "Burp!" : "Serving"}</div>)}
                 </div>
               </motion.div>
             );
@@ -190,7 +190,7 @@ export default function DayOverviewContent({ dayOffset = 0, showTimeAndStatus = 
       {scheduleWithStatus.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} drag="x" dragConstraints={{ left: 0, right: 0 }} onDragEnd={handleScheduleSwipe} whileDrag={{ scale: 1.02 }} className="space-y-6 cursor-grab active:cursor-grabbing">
           <div className="text-center mb-6 relative">
-            <h2 className="text-2xl font-bold text-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent inline-block">
+            <h2 className="text-[1.7rem] font-bold text-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent inline-block">
               {dayOffset === 0 ? "Today's Schedule" : "Tomorrow's Schedule"}
             </h2>
             <Link to="/schedule" className="absolute top-1/2 -translate-y-1/2 ml-2">
@@ -209,18 +209,18 @@ export default function DayOverviewContent({ dayOffset = 0, showTimeAndStatus = 
               const styles = getStatusStyles(item.status, 'class');
               const timeRange = `${item.start_time.slice(0, 5)} - ${item.end_time.slice(0, 5)}`;
               return (
-                <motion.div key={item.id} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} className={`p-5 rounded-2xl ${styles.bg}`}>
+                <motion.div key={item.id} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} className={`p-6 rounded-2xl ${styles.bg}`}>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       {item.item_type === 'lab' ? (<FlaskConical className="w-7 h-7 text-orange-400" />) : (<BookOpen className={`w-7 h-7 ${styles.text}`} />)}
                       <div>
-                        <h3 className={`text-xl font-bold ${styles.text}`}>{item.name}</h3>
-                        <p className="text-gray-300 font-medium text-sm">{item.room}</p>
-                        <p className="text-gray-400 font-medium text-sm">{timeRange}</p>
+                        <h3 className={`text-2xl font-semibold ${styles.text}`}>{item.name}</h3>
+                        <p className="text-gray-300 font-medium text-lg">{item.room}</p>
+                        <p className="text-gray-300/90 font-medium text-lg">{timeRange}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      {showTimeAndStatus && item.status !== 'upcoming' && (<div className={`flex items-center justify-center flex-shrink-0 px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide ${styles.badge}`}>{item.status === 'completed' ? (<Check className="w-5 h-5" />) : ("Live")}</div>)}
+                      {showTimeAndStatus && item.status !== 'upcoming' && (<div className={`flex items-center justify-center flex-shrink-0 px-4 py-2 rounded-full text-base font-bold uppercase tracking-wide ${styles.badge}`}>{item.status === 'completed' ? (<Check className="w-5 h-5" />) : ("Live")}</div>)}
                     </div>
                   </div>
                 </motion.div>
