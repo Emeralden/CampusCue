@@ -15,7 +15,7 @@ export default function TomorrowOverview() {
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center gap-4 mb-8"
+          className="flex items-center justify-between mb-8"
         >
           <Link to={createPageUrl("Dashboard")}>
             <motion.button 
@@ -32,6 +32,7 @@ export default function TomorrowOverview() {
               Tomorrow
             </h1>
           </div>
+          <div className="w-12 h-12"></div>
         </motion.div>
 
         <motion.div 

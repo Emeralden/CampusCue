@@ -3,7 +3,6 @@ import { Sun, CloudSnow, Sunset, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import UserHub from './UserHub';
 
 export default function TimeBasedGreeting() {
   const [greeting, setGreeting] = React.useState('');
@@ -45,7 +44,7 @@ export default function TimeBasedGreeting() {
     <motion.div 
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="text-center mb-12 relative"
+      className="text-center mb-12"
     >
       <div className="flex items-center justify-center gap-3 mb-3">
         <motion.div
@@ -54,7 +53,7 @@ export default function TimeBasedGreeting() {
         >
           <IconComponent className="w-10 h-10 text-yellow-400 drop-shadow-lg" />
         </motion.div>
-        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent leading-relaxed py-4">
+        <h1 className="text-[2.6rem] md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent leading-relaxed py-4">
           {greeting}
         </h1>
       </div>
@@ -69,7 +68,7 @@ export default function TimeBasedGreeting() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="flex items-center justify-center gap-2 text-gray-400 text-lg font-medium group hover:text-gray-300 transition-colors"
+          className="flex items-center justify-center gap-2 text-gray-400 text-[1.3rem] font-medium group hover:text-gray-300 transition-colors"
         >
           <span>
             {new Date().toLocaleDateString('en-US', { 
@@ -79,10 +78,6 @@ export default function TimeBasedGreeting() {
               day: 'numeric' 
             })}
           </span>
-
-          <div className="absolute top-0 left-0">
-            <UserHub />
-          </div>
         </motion.div>
       </motion.div>
     </motion.div>
