@@ -629,12 +629,6 @@ SCHEDULE_DATA = [
     {"day_of_week": "friday", "item_type": "lab", "course_type": "core", "name": "Instrumentation Lab", "room": "SID, ED1 Lvl-3", "start_time": time(15, 30), "end_time": time(18, 30)},
 ]
 
-async def wipe_user_subscriptions():
-    print("Wiping user schedule subscriptions...")
-    wipe_query = user_schedule_table.delete()
-    await database.execute(wipe_query)
-    print("User subscriptions wiped.")
-
 async def seed_mess_menu():
     print("Starting mess menu seeding process...")
     wipe_query = mess_menu_items_table.delete()
@@ -659,7 +653,6 @@ async def main():
     print("Starting seeding...")
     await database.connect()
     try:
-        await wipe_user_subscriptions()
         await seed_mess_menu()
         await seed_schedule()
     except Exception as e:

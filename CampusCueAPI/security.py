@@ -46,8 +46,6 @@ async def authenticate_user(email:str, password:str):
 
 SECRET_KEY = settings.secret_key
 ALGORITHM = "HS256"
-REFRESH_TOKEN_EXPIRE_DAYS = 31
-
 def create_access_token(data: dict):
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + timedelta(minutes=60)
@@ -60,7 +58,7 @@ def create_access_token(data: dict):
 def create_refresh_token(data: dict):
     to_encode = data.copy()
 
-    expire = datetime.now(timezone.utc) + timedelta(days=REFRESH_TOKEN_EXPIRE_DAYS)
+    expire = datetime.now(timezone.utc) + timedelta(days=31)
     to_encode.update({"exp": expire})
     
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)

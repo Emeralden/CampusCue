@@ -125,26 +125,28 @@ export default function FullSchedule() {
                 transition={{ delay: index * 0.05 }}
                 className="glass rounded-2xl p-6 border border-gray-600/50 hover:border-blue-400/50 transition-all"
               >
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-5  flex-1 min-w-0">
+                <div className="flex flex-col h-full">
+                  
+                  <div className="flex items-center gap-5 flex-1">
                     {item.item_type === 'lab' ? (
-                      <div className="p-3 bg-orange-500/20 rounded-xl border border-orange-400/50">
+                      <div className="p-3 bg-orange-500/20 rounded-xl border border-orange-400/50 flex-shrink-0">
                         <FlaskConical className="w-8 h-8 text-orange-400" />
                       </div>
                     ) : (
-                      <div className="p-3 bg-blue-500/20 rounded-xl border border-blue-400/50">
+                      <div className="p-3 bg-blue-500/20 rounded-xl border border-blue-400/50 flex-shrink-0">
                         <BookOpen className="w-8 h-8 text-blue-400" />
                       </div>
                     )}
-                    <div className="min-w-0">
-                          <h3 className="text-2xl font-bold text-white mb-1">{item.name}</h3>
-                          <p className="text-gray-400 font-medium">{item.room}</p>
-                        </div>
-                      </div>
-                      <div className="text-right flex-shrink-0">
-                        <p className="text-xl font-mono font-bold text-cyan-400 whitespace-nowrap">{item.time}</p>
-                      </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-1">{item.name}</h3>
+                      <p className="text-base text-gray-400 font-medium">{item.room}</p>
                     </div>
+                  </div>
+
+                  <div className="mt-4 pt-4 border-t border-gray-700/50 flex justify-end">
+                    <p className="text-lg font-mono font-bold text-cyan-400">{item.time}</p>
+                  </div>
+                </div>
               </motion.div>
             )})
           ) : (
