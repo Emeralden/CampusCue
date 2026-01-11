@@ -78,8 +78,6 @@ engine = sqlalchemy.create_engine(
     connect_args=connect_args,
 )
 
-metadata.create_all(engine)
-
 database = databases.Database(
     settings.database_url,
     **pool_args
