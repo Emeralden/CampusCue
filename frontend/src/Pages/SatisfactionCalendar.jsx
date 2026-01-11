@@ -124,10 +124,10 @@ export default function SatisfactionCalendar() {
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-4xl mx-auto space-y-8">
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="flex items-center justify-center mb-10 relative">
-          <Link to={createPageUrl("Dashboard")} className="absolute left-0">
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="relative flex items-center justify-center mb-10">
+          <Link to={createPageUrl("Dashboard")} className="absolute -left-6">
             <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="p-3 glass hover:bg-gray-700/50 rounded-xl transition-all border border-gray-600/50">
-              <ArrowLeft className="w-6 h-6 text-gray-300" />
+              <ArrowLeft className="w-5 h-5 text-gray-300" />
             </motion.button>
           </Link>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">Hustle Meter</h1>
@@ -144,7 +144,7 @@ export default function SatisfactionCalendar() {
             </motion.button>
           </div>
 
-          <motion.div key={currentMonth.toString()} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2, duration: 0.5 }} className="grid grid-cols-7 gap-2">
+          <motion.div key={currentMonth.toString()} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2, duration: 0.5 }} className="grid grid-cols-7 gap-1">
             {weekdays.map((day) => <div key={day} className="text-center font-bold text-gray-400 pb-2 text-sm">{day}</div>)}
             {calendarDays.map((day, index) => {
               if (!day) return <div key={`blank-${index}`} />;

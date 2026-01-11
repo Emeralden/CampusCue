@@ -1,7 +1,14 @@
 
-import React from "react";
+import React, {useEffect} from "react";
+import { useLocation } from "react-router-dom";
 
-export default function Layout({ children, currentPageName }) {
+export default function Layout({ children}) {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
   React.useEffect(() => {
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) {

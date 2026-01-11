@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import TimeBasedGreeting from '../Components/TimeBasedGreeting';
+import Greeting from '../Components/Greeting';
 import CurrentDayOverview from '../Components/CurrentDayOverview';
 import SatisfactionModal from '../Components/SatisfactionModal';
 import UserHub from '../Components/UserHub.jsx';
@@ -96,7 +96,7 @@ export default function Dashboard() {
         <UserHub />
       </div>
       <div className="max-w-2xl mx-auto space-y-10">
-        <TimeBasedGreeting />
+        <Greeting />
         <CurrentDayOverview />
       </div>
       <AnimatePresence>

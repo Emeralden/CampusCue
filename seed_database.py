@@ -56,7 +56,7 @@ MENU_DATA: List[Dict[str, str]] = [
         "day_of_week": "wednesday",
         "meal_type": "breakfast",
         "menu_type": "veg",
-        "description": "Aloo onion Paratha (2 + 1) + Pudina Chutney & Sauce + curd"
+        "description": "Aloo onion Paratha + Pudina Chutney & Sauce + curd"
     },
     {
         "cycle_type": "weeks_1_3",
@@ -70,7 +70,7 @@ MENU_DATA: List[Dict[str, str]] = [
         "day_of_week": "wednesday",
         "meal_type": "dinner",
         "menu_type": "veg",
-        "description": "Palak Panner + Lasun Chutney + Gulab Jamun (2 pcs)"
+        "description": "Palak Panner + Lasun Chutney + Gulab Jamun"
     },
     {
         "cycle_type": "weeks_1_3",
@@ -154,7 +154,7 @@ MENU_DATA: List[Dict[str, str]] = [
         "day_of_week": "sunday",
         "meal_type": "dinner",
         "menu_type": "veg",
-        "description": "Paneer Dum Biryani + 1 additional scoop rice + Onion Raita (150ml) + Gravy + Sahi Tukda"
+        "description": "Paneer Dum Biryani + Onion Raita + Gravy + Sahi Tukda"
     },
     {
         "cycle_type": "weeks_1_3",
@@ -203,7 +203,7 @@ MENU_DATA: List[Dict[str, str]] = [
         "day_of_week": "wednesday",
         "meal_type": "breakfast",
         "menu_type": "non_veg",
-        "description": "Aloo onion Paratha (2 + 1) + Pudina Chutney & Sauce + curd"
+        "description": "Aloo onion Paratha + Pudina Chutney & Sauce + curd"
     },
     {
         "cycle_type": "weeks_1_3",
@@ -217,7 +217,7 @@ MENU_DATA: List[Dict[str, str]] = [
         "day_of_week": "wednesday",
         "meal_type": "dinner",
         "menu_type": "non_veg",
-        "description": "Butter Chicken + Lasun Chutney + Gulab Jamun (2 pcs)"
+        "description": "Butter Chicken + Lasun Chutney + Gulab Jamun"
     },
     {
         "cycle_type": "weeks_1_3",
@@ -301,14 +301,14 @@ MENU_DATA: List[Dict[str, str]] = [
         "day_of_week": "sunday",
         "meal_type": "dinner",
         "menu_type": "non_veg",
-        "description": "Chicken Dum Biryani + 1 additional scoop + Onion raita (150ml) + Gravy + Sahi Tukda"
+        "description": "Chicken Dum Biryani + Onion raita + Gravy + Sahi Tukda"
     },
     {
         "cycle_type": "weeks_2_4",
         "day_of_week": "monday",
         "meal_type": "breakfast",
         "menu_type": "veg",
-        "description": "Masala dosa (2+1) + Coconut Chutney + Sambhar"
+        "description": "Masala dosa + Coconut Chutney + Sambhar"
     },
     {
         "cycle_type": "weeks_2_4",
@@ -364,7 +364,7 @@ MENU_DATA: List[Dict[str, str]] = [
         "day_of_week": "wednesday",
         "meal_type": "dinner",
         "menu_type": "veg",
-        "description": "Palak Panner + manchow soup + Gulab Jamun (2 pcs)"
+        "description": "Palak Panner + manchow soup + Gulab Jamun"
     },
     {
         "cycle_type": "weeks_2_4",
@@ -448,14 +448,14 @@ MENU_DATA: List[Dict[str, str]] = [
         "day_of_week": "sunday",
         "meal_type": "dinner",
         "menu_type": "veg",
-        "description": "Paneer Dum Biryani + 1 additional scoop + Onion raita (150ml) + Gravy + Gajar Halwa"
+        "description": "Paneer Dum Biryani + Onion raita + Gravy + Gajar Halwa"
     },
     {
         "cycle_type": "weeks_2_4",
         "day_of_week": "monday",
         "meal_type": "breakfast",
         "menu_type": "non_veg",
-        "description": "Masala dosa (2+1) + Coconut Chutney + Sambhar"
+        "description": "Masala dosa + Coconut Chutney + Sambhar"
     },
     {
         "cycle_type": "weeks_2_4",
@@ -511,7 +511,7 @@ MENU_DATA: List[Dict[str, str]] = [
         "day_of_week": "wednesday",
         "meal_type": "dinner",
         "menu_type": "non_veg",
-        "description": "Pepper Chicken + Manchow soup + Gulab Jamun (2 pcs)"
+        "description": "Pepper Chicken + Manchow soup + Gulab Jamun"
     },
     {
         "cycle_type": "weeks_2_4",
@@ -595,7 +595,7 @@ MENU_DATA: List[Dict[str, str]] = [
         "day_of_week": "sunday",
         "meal_type": "dinner",
         "menu_type": "non_veg",
-        "description": "Chicken Biryani(3 pcs~ 150 gm) + 1 additional scoop +Onion raita (150ml) + Gravy + Sahi tukda"
+        "description": "Chicken Biryani + Onion raita + Gravy + Sahi tukda"
     }
 ]
 

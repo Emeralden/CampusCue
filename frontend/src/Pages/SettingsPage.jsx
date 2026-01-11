@@ -58,13 +58,13 @@ export default function SettingsPage() {
   return (
     <div className="min-h-screen bg-gray-900 px-4 py-6">
       <div className="max-w-2xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-4 mb-8">
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="relative flex items-center gap-4 mb-8">
           <Link to="/">
             <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="p-3 glass hover:bg-gray-700/50 rounded-xl transition-all border border-gray-600/50">
               <ArrowLeft className="w-6 h-6 text-gray-300" />
             </motion.button>
           </Link>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">Settings</h1>
+          <h1 className="absolute left-1/2 -translate-x-1/2 leading-[1.2] pb-1 text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">Settings</h1>
         </motion.div>
         
         <div className="space-y-6">

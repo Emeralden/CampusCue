@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
-export default function TimeBasedGreeting() {
+export default function Greeting() {
   const [greeting, setGreeting] = React.useState('');
   const [icon, setIcon] = React.useState("🏖️");
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ export default function TimeBasedGreeting() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="flex items-center justify-center gap-2 text-gray-400 text-[1.3rem] font-medium group hover:text-gray-300 transition-colors"
+          className="flex items-center justify-center gap-2 text-gray-400 text-[1.2rem] font-medium group hover:text-gray-300 transition-colors"
         >
           <span>
             {new Date().toLocaleDateString('en-US', { 

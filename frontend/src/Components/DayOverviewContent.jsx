@@ -252,7 +252,7 @@ export default function DayOverviewContent({ dayOffset = 0, showTimeAndStatus = 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
-        className="text-center pt-7 pb-0"
+        className="text-center pt-7"
       >
         <p className="text-sm font-semibold text-gray-600 tracking-wider">
           Powered by Bhargav ⚡️

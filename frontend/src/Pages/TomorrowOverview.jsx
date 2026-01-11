@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Calendar } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
@@ -15,24 +15,22 @@ export default function TomorrowOverview() {
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between mb-8"
+          className="relative flex items-center justify-center mb-8"
         >
-          <Link to={createPageUrl("Dashboard")}>
+          <Link to={createPageUrl("Dashboard")} className="absolute -left-4">
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="p-3 glass hover:bg-gray-700/50 rounded-xl transition-all border border-gray-600/50"
+              className="p-4 glass hover:bg-gray-700/50 rounded-xl transition-all border border-gray-600/50"
             >
-              <ArrowLeft className="w-6 h-6 text-gray-300" />
+              <ArrowLeft className="w-5 h-5 text-gray-300" />
             </motion.button>
           </Link>
-          <div className="flex items-center gap-3">
-            <Calendar className="w-10 h-10 text-purple-400" />
+          <div className="flex items-center">
             <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
               Tomorrow
             </h1>
           </div>
-          <div className="w-12 h-12"></div>
         </motion.div>
 
         <motion.div 
@@ -40,7 +38,7 @@ export default function TomorrowOverview() {
           animate={{ opacity: 1, scale: 1 }}
           className="text-center mb-8"
         >
-          <p className="text-gray-400 text-lg font-medium">
+          <p className="text-gray-400 text-[1.2rem] font-medium">
             {tomorrow.toLocaleDateString('en-US', { 
               weekday: 'long', 
               year: 'numeric', 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, BookOpen, FlaskConical, Calendar, RefreshCw } from 'lucide-react';
+import { ArrowLeft, BookOpen, FlaskConical, RefreshCw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import apiClient from '@/apiClient';
@@ -47,22 +47,21 @@ export default function FullSchedule() {
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between mb-8"
+          className="relative flex items-center justify-center mb-8"
         >
-          <div className="flex items-center gap-4">
-            <Link to="/">
+          <div className="flex items-center">
+            <Link to="/" className="absolute -left-4">
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-3 glass hover:bg-gray-700/50 rounded-xl transition-all border border-gray-600/50"
+                className="p-4 glass hover:bg-gray-700/50 rounded-xl transition-all border border-gray-600/50"
               >
-                <ArrowLeft className="w-6 h-6 text-gray-300" />
+                <ArrowLeft className="w-5 h-5 text-gray-300" />
               </motion.button>
             </Link>
           </div>
 
           <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-3">
-            <Calendar className="w-10 h-10 text-blue-400" />
             <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
               Schedule
             </h1>
