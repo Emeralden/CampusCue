@@ -11,6 +11,7 @@ import FullSchedule from './Pages/FullSchedule.jsx';
 import SatisfactionCalendar from './Pages/SatisfactionCalendar.jsx';
 import TomorrowOverview from './Pages/TomorrowOverview.jsx';
 import SettingsPage from './Pages/SettingsPage.jsx';
+import OnboardingCourses from './Pages/OnboardingCourses.jsx';
 import Layout from './Layout.jsx';
 
 const queryClient = new QueryClient();
@@ -70,6 +71,14 @@ export default function App() {
                   <SettingsPage />
                 </AuthGuard>
               }
+            />
+            <Route 
+              path="/onboarding/courses" 
+              element={
+                <AuthGuard>
+                  <OnboardingCourses />
+                </AuthGuard>
+              } 
             />
           </Routes>
         </Layout>

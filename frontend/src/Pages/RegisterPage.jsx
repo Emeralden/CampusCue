@@ -90,12 +90,12 @@ export default function RegisterPage() {
             className="w-full max-w-md text-center glass rounded-3xl p-8 border border-purple-400/30 shadow-2xl neon-glow-purple"
           >
             <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-4">
-              One Last Step...
+              One More Step...
             </h1>
             <p className="text-gray-400 mb-8">
               What do you eat?
             </p>
-            <DietaryChoice currentUser={currentUser} onComplete={() => navigate('/')} showButton={true} />
+            <DietaryChoice currentUser={currentUser} onComplete={() => navigate('/onboarding/courses')} showButton={true} />
           </motion.div>
         </motion.div>
       ) : success ? (

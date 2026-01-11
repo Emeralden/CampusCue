@@ -1,5 +1,6 @@
 from pydantic import BaseModel, computed_field
 from datetime import date, time
+from typing import List
 
 class ScheduleOverride(BaseModel):
     override_date: date
@@ -20,3 +21,6 @@ class ScheduleItem(BaseModel):
 
     class Config:
         from_attributes = True
+
+class CourseSubscription(BaseModel):
+    schedule_item_ids: List[int]

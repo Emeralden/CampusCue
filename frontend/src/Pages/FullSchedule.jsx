@@ -7,12 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { format } from 'date-fns';
 import ScheduleOverrideModal from '../Components/ScheduleOverrideModal';
 
-const fetchScheduleByDay = async (day) => {
-  if (!day) return [];
-  const { data } = await apiClient.get(`/schedule?day=${day}`);
-  return data;
-};
-
 export default function FullSchedule() {
   const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
   const currentDayIndex = new Date().getDay();
@@ -26,11 +20,21 @@ export default function FullSchedule() {
     setActiveDay(currentDay);
   }, [currentDay]);
 
-  const { data: scheduleItems, isLoading, isError } = useQuery({
-    queryKey: ['schedule', activeDay],
-    queryFn: () => fetchScheduleByDay(activeDay),
-    staleTime: 0,
-  });
+  const { data: scheduleData, isLoading, isError } = useQuery({
+  queryKey: ['mySchedule', activeDay],
+  queryFn: async () => {
+    const today = new Date();
+    const todayDayIndex = today.getDay() === 0 ? 6 : today.getDay() - 1;
+    const targetDayIndex = days.indexOf(activeDay);
+    const dateOffset = targetDayIndex - todayDayIndex;
+    const targetDate = new Date();
+    targetDate.setDate(today.getDate() + dateOffset);
+    const dateStr = format(targetDate, 'yyyy-MM-dd');
+    
+    return (await apiClient.get(`/schedule/my-day?date=${dateStr}`)).data;
+  },
+  staleTime: 5 * 60 * 1000,
+});
 
   const handleOverrideSuccess = () => {
     queryClient.invalidateQueries({ queryKey: ['mySchedule'] });
@@ -111,8 +115,8 @@ export default function FullSchedule() {
         >
           {isLoading && <p className="text-center text-gray-400 pt-16">Loading schedule...</p>}
           {isError && <p className="text-center text-red-400 pt-16">Error loading schedule.</p>}
-          {!isLoading && !isError && scheduleItems?.length > 0 ? (
-            scheduleItems.map((item, index) => {
+          {!isLoading && !isError && scheduleData?.length > 0 ? (
+            scheduleData.map((item, index) => {
               const timeRange = `${item.start_time.slice(0, 5)} - ${item.end_time.slice(0, 5)}`;
               return (
               <motion.div
