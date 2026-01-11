@@ -6,7 +6,7 @@ from datetime import time
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from CampusCueAPI.database import database, mess_menu_items_table, schedule_items_table, user_schedule_table
+from CampusCueAPI.database import database, mess_menu_items_table, schedule_items_table
 
 MENU_DATA: List[Dict[str, str]] = [
     {
