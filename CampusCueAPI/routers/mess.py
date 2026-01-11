@@ -23,12 +23,14 @@ async def get_my_menu(
 
     day_of_week = target_date.strftime("%A").lower()
     user_cycle = current_user.mess_cycle
+    user_diet = current_user.diet_type
 
     query = (
         mess_menu_items_table.select().where(
             sqlalchemy.and_(
                 mess_menu_items_table.c.cycle_type == user_cycle,
                 mess_menu_items_table.c.day_of_week == day_of_week,
+                mess_menu_items_table.c.menu_type == user_diet
             )
         )
     )

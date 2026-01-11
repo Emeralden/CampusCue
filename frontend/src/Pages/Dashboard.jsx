@@ -18,6 +18,11 @@ export default function Dashboard() {
   const [promptDate, setPromptDate] = useState(null);
   const queryClient = useQueryClient();
 
+  const { data: currentUser } = useQuery({
+  queryKey: ['currentUser'],
+  queryFn: async () => (await apiClient.get('/users/me')).data,
+  });
+
   const { data: allLogs, isLoading, isError } = useQuery({
     queryKey: ['satisfactionHistory'],
     queryFn: fetchSatisfactionHistory,
@@ -25,6 +30,7 @@ export default function Dashboard() {
   });
 
   useEffect(() => {
+  if (!currentUser || !currentUser.enable_satisfaction_prompt) return;
   if (!allLogs || allLogs.length === 0) return;
 
     const checkForMissedMoodLogs = () => {
@@ -55,12 +61,17 @@ export default function Dashboard() {
     };
 
     checkForMissedMoodLogs();
-  }, [allLogs]);
+  }, [allLogs, currentUser]);
 
   const handleMoodLogged = () => {
     setShowSatisfactionModal(false);
     setPromptDate(null);
     queryClient.invalidateQueries({ queryKey: ['satisfactionHistory'] });
+  };
+
+  const handleCancelPrompt = () => {
+  setShowSatisfactionModal(false);
+  setPromptDate(null);
   };
 
   if (isLoading) {
@@ -93,6 +104,7 @@ export default function Dashboard() {
           <SatisfactionModal 
             date={promptDate}
             onSuccess={handleMoodLogged}
+            onCancel={handleCancelPrompt}
           />
         )}
       </AnimatePresence>

@@ -68,7 +68,7 @@ export default function Layout({ children, currentPageName }) {
         }
         
         .neon-glow-blue {
-          box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+          box-shadow: 0 0 11px rgba(0, 212, 255, 0.3);
         }
         
         .neon-glow-purple {
@@ -85,6 +85,10 @@ export default function Layout({ children, currentPageName }) {
         
         .neon-glow-green {
           box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+        }
+        
+        .neon-glow-orange {
+          box-shadow: 0 0 20px rgba(251, 146, 60, 0.3);
         }
         
         @keyframes neon-pulse-blue {

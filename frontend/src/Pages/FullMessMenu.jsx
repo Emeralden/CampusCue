@@ -21,7 +21,7 @@ export default function FullMessMenu() {
   const { data: rawMenuData, isLoading, isError } = useQuery({
     queryKey: ['fullMenu', activeWeek],
     queryFn: () => fetchFullMenu(activeWeek),
-    staleTime: 0,
+    staleTime: 5 * 60 * 1000,
   });
 
   const menuByDay = React.useMemo(() => {

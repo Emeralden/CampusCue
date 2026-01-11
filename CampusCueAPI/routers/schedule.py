@@ -1,16 +1,65 @@
 import logging
 import sqlalchemy
-from fastapi import APIRouter, Depends, status, Query
+from fastapi import APIRouter, Depends, status, Query, HTTPException
 from datetime import datetime
 from typing import List
 
-from ..database import database, schedule_overrides_table, schedule_items_table
-from ..models.schedule import ScheduleOverride, ScheduleItem
+from ..database import database, schedule_overrides_table, schedule_items_table, user_schedule_table
+from ..models.schedule import ScheduleOverride, ScheduleItem, CourseSubscription
 from ..models.user import User
 from ..security import get_current_user
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
+
+@router.post("/subscriptions", status_code=status.HTTP_204_NO_CONTENT)
+async def update_course_subscriptions(
+    subscription_data: CourseSubscription,
+    current_user: User = Depends(get_current_user),
+):
+    logger.info(f"User {current_user.email} updating course subscriptions.")
+
+    requested_ids = subscription_data.schedule_item_ids
+    if not requested_ids:
+        wipe_query = user_schedule_table.delete().where(user_schedule_table.c.user_id == current_user.id)
+        await database.execute(wipe_query)
+        return
+
+    select_query = schedule_items_table.select().where(schedule_items_table.c.id.in_(requested_ids))
+    selected_courses = await database.fetch_all(select_query)
+
+    sorted_courses = sorted(selected_courses, key=lambda c: (c['day_of_week'], c['start_time']))
+    for i in range(len(sorted_courses) - 1):
+        current_course = sorted_courses[i]
+        next_course = sorted_courses[i+1]
+        
+        if current_course['day_of_week'] == next_course['day_of_week'] and next_course['start_time'] < current_course['end_time']:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Schedule clash detected between {current_course['name']} and {next_course['name']}."
+            )
+
+    wipe_query = user_schedule_table.delete().where(user_schedule_table.c.user_id == current_user.id)
+    await database.execute(wipe_query)
+
+    new_subscriptions = [
+        {"user_id": current_user.id, "schedule_item_id": course_id}
+        for course_id in requested_ids
+    ]
+    insert_query = user_schedule_table.insert()
+    await database.execute_many(query=insert_query, values=new_subscriptions)
+
+    return
+
+@router.get("/electives", response_model=List[ScheduleItem])
+async def get_available_electives():
+    logger.info("Fetching all available elective and la courses.")
+    
+    query = schedule_items_table.select().where(
+        schedule_items_table.c.course_type.in_(["elective", "la"])
+    )
+    
+    return await database.fetch_all(query)
 
 @router.post("/overrides", status_code=status.HTTP_201_CREATED)
 async def create_schedule_override(
@@ -84,46 +133,52 @@ async def delete_schedule_override(
 
     return None
 
-@router.get("/my-day")
+@router.get("/my-day", response_model=List[ScheduleItem])
 async def get_my_daily_schedule(
     date_str: str = Query(..., alias="date"),
     current_user: User = Depends(get_current_user)
-    ):
+):
     target_date = datetime.strptime(date_str, "%Y-%m-%d").date()
-    logger.info(f"Fetching schedule for user {current_user.email} for date {target_date}")
-
+    
     override_query = schedule_overrides_table.select().where(
         sqlalchemy.and_(
             schedule_overrides_table.c.user_id == current_user.id,
             schedule_overrides_table.c.override_date == target_date,
         )
     )
-
     active_override = await database.fetch_one(override_query)
-
+    
     day_to_fetch = target_date.strftime("%A").lower()
-    has_override = False
-
     if active_override:
         day_to_fetch = active_override["target_day"]
-        has_override = True
         logger.debug(f"Override found! Fetching schedule for {day_to_fetch.upper()}")
     
+    logger.info(f"Fetching V2 schedule for user {current_user.email} on day {day_to_fetch}")
 
-    schedule_query = (
-        schedule_items_table.select()
-        .where(schedule_items_table.c.day_of_week == day_to_fetch)
-        .order_by(schedule_items_table.c.start_time)
+    core_query = schedule_items_table.select().where(
+        sqlalchemy.and_(
+            schedule_items_table.c.day_of_week == day_to_fetch,
+            schedule_items_table.c.course_type == "core"
+        )
     )
+    
+    subscribed_query = (
+        schedule_items_table.select()
+        .join(user_schedule_table, schedule_items_table.c.id == user_schedule_table.c.schedule_item_id)
+        .where(
+            sqlalchemy.and_(
+                user_schedule_table.c.user_id == current_user.id,
+                schedule_items_table.c.day_of_week == day_to_fetch
+            )
+        )
+    )
+    
+    core_items = await database.fetch_all(core_query)
+    subscribed_items = await database.fetch_all(subscribed_query)
 
-    items = await database.fetch_all(schedule_query)
-
-    return {
-        "date": target_date,
-        "schedule_day": day_to_fetch,
-        "has_override": has_override,
-        "items": items
-    }
+    full_schedule = sorted(core_items + subscribed_items, key=lambda item: item["start_time"])
+    
+    return full_schedule
 
 @router.get("", response_model=List[ScheduleItem])
 async def get_master_schedule(day: str):
