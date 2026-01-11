@@ -64,7 +64,7 @@ schedule_overrides_table = sqlalchemy.Table (
 )
 
 satisfaction_logs_table = sqlalchemy.Table (
-    "Satisfaction Logs",
+    "satisfaction_logs",
     metadata,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("user_id", sqlalchemy.ForeignKey("users.id"), nullable=False),
@@ -89,6 +89,8 @@ engine = sqlalchemy.create_engine(
     settings.database_url,
     connect_args=connect_args,
 )
+
+metadata.create_all(engine)
 
 database = databases.Database(
     settings.database_url,
