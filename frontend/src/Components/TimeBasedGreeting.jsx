@@ -1,35 +1,28 @@
 import React from 'react';
-import { Sun, CloudSnow, Sunset, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
 export default function TimeBasedGreeting() {
   const [greeting, setGreeting] = React.useState('');
-  const [icon, setIcon] = React.useState(Sun);
+  const [icon, setIcon] = React.useState("🏖️");
   const navigate = useNavigate();
 
-  React.useEffect(() => {
-    const updateGreeting = () => {
-      const hour = new Date().getHours();
-      if (hour >= 5 && hour < 12) {
-        setGreeting('Good Morning!');
-        setIcon(Sun);
-      } else if (hour >= 12 && hour < 16) {
-        setGreeting('Good Afternoon!'); 
-        setIcon(CloudSnow);
-      } else if (hour >= 16 && hour < 19) {
-        setGreeting('Good Evening!');
-        setIcon(Sunset);
-      } else {
-        setGreeting('Good Night!');
-        setIcon(Moon);
-      }
-    };
+  const GREETINGS_BY_DAY = {
+    0: { greeting: "Holidayyy!", emoji: "🏖️" },
+    1: { greeting: "Back to it!", emoji: "😭" },
+    2: { greeting: "Still alive", emoji: "😌" },
+    3: { greeting: "Halfway...", emoji: "😮‍💨" },
+    4: { greeting: "Ufffff!", emoji: "🥶" },
+    5: { greeting: "Final rush!", emoji: "⏳" },
+    6: { greeting: "Peace", emoji: "🕊️" },
+  };
 
-    updateGreeting();
-    const interval = setInterval(updateGreeting, 60000);
-    return () => clearInterval(interval);
+  React.useEffect(() => {
+    const dayIndex = new Date().getDay();
+    const { greeting, emoji } = GREETINGS_BY_DAY[dayIndex];
+    setGreeting(greeting);
+    setIcon(emoji);
   }, []);
 
   const handleSwipeLeft = (event, info) => {
@@ -46,12 +39,13 @@ export default function TimeBasedGreeting() {
       animate={{ opacity: 1, y: 0 }}
       className="text-center mb-12"
     >
-      <div className="flex items-center justify-center gap-3 mb-3">
+      <div className="flex items-center justify-center gap-1 mb-3">
         <motion.div
-          animate={{ rotate: [0, 10, -10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
+          className="text-[2.6rem] mb-4 mt-3"
         >
-          <IconComponent className="w-10 h-10 text-yellow-400 drop-shadow-lg" />
+          {icon}
         </motion.div>
         <h1 className="text-[2.6rem] md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent leading-relaxed py-4">
           {greeting}

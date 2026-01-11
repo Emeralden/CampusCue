@@ -68,7 +68,7 @@ export default function Layout({ children, currentPageName }) {
         }
         
         .neon-glow-blue {
-          box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+          box-shadow: 0 0 11px rgba(0, 212, 255, 0.3);
         }
         
         .neon-glow-purple {

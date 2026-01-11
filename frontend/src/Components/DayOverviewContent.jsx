@@ -39,7 +39,7 @@ export default function DayOverviewContent({ dayOffset = 0, showTimeAndStatus = 
     queryKey: ['myMenu', dateStr],
     queryFn: () => fetchMyMenu(dateStr),
     refetchOnWindowFocus: true,
-    staleTime: 60 * 1000,
+    staleTime: 5 * 60 * 1000,
     refetchInterval: 60 * 1000,
   });
 
@@ -47,7 +47,7 @@ export default function DayOverviewContent({ dayOffset = 0, showTimeAndStatus = 
     queryKey: ['mySchedule', dateStr],
     queryFn: () => fetchMySchedule(dateStr),
     refetchOnWindowFocus: true,
-    staleTime: 60 * 1000,
+    staleTime: 5 * 60 * 1000,
     refetchInterval: 60 * 1000,
   });
 
@@ -131,7 +131,7 @@ export default function DayOverviewContent({ dayOffset = 0, showTimeAndStatus = 
     return <div className="text-center text-red-400 p-8">Error fetching daily overview. Please try again later.</div>;
   }
   
-  const scheduleWithStatus = scheduleData?.items.map(item => ({
+  const scheduleWithStatus = scheduleData?.map(item => ({
     ...item,
     status: getTimeStatus(item.start_time, item.end_time)
   })) || [];
@@ -252,7 +252,7 @@ export default function DayOverviewContent({ dayOffset = 0, showTimeAndStatus = 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
-        className="text-center pt-5 pb-1"
+        className="text-center pt-7 pb-0"
       >
         <p className="text-sm font-semibold text-gray-600 tracking-wider">
           Powered by Bhargav ⚡️

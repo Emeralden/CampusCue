@@ -51,6 +51,16 @@ async def update_course_subscriptions(
 
     return
 
+@router.get("/electives", response_model=List[ScheduleItem])
+async def get_available_electives():
+    logger.info("Fetching all available elective and la courses.")
+    
+    query = schedule_items_table.select().where(
+        schedule_items_table.c.course_type.in_(["elective", "la"])
+    )
+    
+    return await database.fetch_all(query)
+
 @router.post("/overrides", status_code=status.HTTP_201_CREATED)
 async def create_schedule_override(
     override_data: ScheduleOverride,
