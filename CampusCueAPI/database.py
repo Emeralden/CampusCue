@@ -39,10 +39,18 @@ schedule_items_table = sqlalchemy.Table (
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("day_of_week", sqlalchemy.String, nullable=False),
     sqlalchemy.Column("item_type", sqlalchemy.String, nullable=False),
+    sqlalchemy.Column("course_type", sqlalchemy.String, server_default="core", nullable=False),
     sqlalchemy.Column("name", sqlalchemy.String, nullable=False),
     sqlalchemy.Column("room", sqlalchemy.String, nullable=False),
     sqlalchemy.Column("start_time", sqlalchemy.Time, nullable=False),
     sqlalchemy.Column("end_time", sqlalchemy.Time, nullable=False),
+)
+
+user_schedule_table = sqlalchemy.Table(
+    "user_schedule",
+    metadata,
+    sqlalchemy.Column("user_id", sqlalchemy.ForeignKey("users.id"), primary_key=True),
+    sqlalchemy.Column("schedule_item_id", sqlalchemy.ForeignKey("schedule_items.id"), primary_key=True),
 )
 
 schedule_overrides_table = sqlalchemy.Table (

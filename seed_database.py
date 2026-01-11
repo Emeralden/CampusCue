@@ -601,27 +601,32 @@ MENU_DATA: List[Dict[str, str]] = [
 
 SCHEDULE_DATA = [
     # Monday
-    {"day_of_week": "monday", "item_type": "class", "name": "AST", "room": "L102", "start_time": time(8, 30), "end_time": time(9, 30)},
-    {"day_of_week": "monday", "item_type": "class", "name": "Nuclear Physics", "room": "L102", "start_time": time(11, 30), "end_time": time(12, 30)},
-    {"day_of_week": "monday", "item_type": "class", "name": "DIP", "room": "L102", "start_time": time(14, 30), "end_time": time(15, 30)},
-    {"day_of_week": "monday", "item_type": "class", "name": "Leadership", "room": "L101", "start_time": time(15, 30), "end_time": time(16, 30)},
+    {"day_of_week": "monday", "item_type": "class", "course_type": "core", "name": "AST", "room": "L102", "start_time": time(8, 30), "end_time": time(9, 30)},
+    {"day_of_week": "monday", "item_type": "class", "course_type": "elective", "name": "Nuclear Physics", "room": "L102", "start_time": time(11, 30), "end_time": time(12, 30)},
+    {"day_of_week": "monday", "item_type": "class", "course_type": "core", "name": "DIP", "room": "L102", "start_time": time(14, 30), "end_time": time(15, 30)},
+    {"day_of_week": "monday", "item_type": "class", "course_type": "la", "name": "Leadership", "room": "L101", "start_time": time(15, 30), "end_time": time(16, 30)},
+    {"day_of_week": "monday", "item_type": "class", "course_type": "elective", "name": "Power Quality", "room": "L102", "start_time": time(16, 30), "end_time": time(17, 30)},
     
     # Tuesday
-    {"day_of_week": "tuesday", "item_type": "lab", "name": "PE Lab", "room": "PoCo, ED1 Lvl-3", "start_time": time(14, 30), "end_time": time(17, 30)},
+    {"day_of_week": "tuesday", "item_type": "lab", "course_type": "core", "name": "PE Lab", "room": "PoCo, ED1 Lvl-3", "start_time": time(14, 30), "end_time": time(17, 30)},
     
     # Wednesday
-    {"day_of_week": "wednesday", "item_type": "class", "name": "Nuclear Physics", "room": "L102", "start_time": time(8, 30), "end_time": time(9, 30)},
-    {"day_of_week": "wednesday", "item_type": "class", "name": "AST", "room": "L102", "start_time": time(9, 30), "end_time": time(10, 30)},
-    {"day_of_week": "wednesday", "item_type": "class", "name": "DIP", "room": "L102", "start_time": time(14, 30), "end_time": time(15, 30)},
+    {"day_of_week": "wednesday", "item_type": "class", "course_type": "elective", "name": "Nuclear Physics", "room": "L102", "start_time": time(8, 30), "end_time": time(9, 30)},
+    {"day_of_week": "wednesday", "item_type": "class", "course_type": "core", "name": "AST", "room": "L102", "start_time": time(9, 30), "end_time": time(10, 30)},
+    {"day_of_week": "wednesday", "item_type": "class", "course_type": "la", "name": "Macroeconomics", "room": "L101", "start_time": time(12, 30), "end_time": time(13, 30)},
+    {"day_of_week": "wednesday", "item_type": "class", "course_type": "core", "name": "DIP", "room": "L102", "start_time": time(14, 30), "end_time": time(15, 30)},
+    {"day_of_week": "wednesday", "item_type": "class", "course_type": "elective", "name": "Power Quality", "room": "L102", "start_time": time(16, 30), "end_time": time(17, 30)},
     
     # Thursday
-    {"day_of_week": "thursday", "item_type": "lab", "name": "Control Lab", "room": "PoCo, ED1 Lvl-3", "start_time": time(9, 30), "end_time": time(12, 30)},
-    {"day_of_week": "thursday", "item_type": "lab", "name": "Machines Lab", "room": "DREEM, ED1 Lvl-2", "start_time": time(14, 30), "end_time": time(17, 30)},
+    {"day_of_week": "thursday", "item_type": "lab", "course_type": "core", "name": "Control Lab", "room": "PoCo, ED1 Lvl-3", "start_time": time(9, 30), "end_time": time(12, 30)},
+    {"day_of_week": "thursday", "item_type": "lab", "course_type": "core", "name": "Machines Lab", "room": "DREEM, ED1 Lvl-2", "start_time": time(14, 30), "end_time": time(17, 30)},
     
     # Friday
-    {"day_of_week": "friday", "item_type": "class", "name": "AST", "room": "L102", "start_time": time(9, 30), "end_time": time(10, 30)},
-    {"day_of_week": "friday", "item_type": "class", "name": "DIP", "room": "L102", "start_time": time(14, 30), "end_time": time(15, 30)},
-    {"day_of_week": "friday", "item_type": "lab", "name": "Instrumentation Lab", "room": "SID, ED1 Lvl-3", "start_time": time(15, 30), "end_time": time(18, 30)},
+    {"day_of_week": "friday", "item_type": "class", "course_type": "la", "name": "Macroeconomics", "room": "L101", "start_time": time(8, 30), "end_time": time(9, 30)},
+    {"day_of_week": "friday", "item_type": "class", "course_type": "core", "name": "AST", "room": "L102", "start_time": time(9, 30), "end_time": time(10, 30)},
+    {"day_of_week": "friday", "item_type": "class", "course_type": "elective", "name": "Power Quality", "room": "L102?", "start_time": time(11, 30), "end_time": time(12, 30)},
+    {"day_of_week": "friday", "item_type": "class", "course_type": "core", "name": "DIP", "room": "L102", "start_time": time(14, 30), "end_time": time(15, 30)},
+    {"day_of_week": "friday", "item_type": "lab", "course_type": "core", "name": "Instrumentation Lab", "room": "SID, ED1 Lvl-3", "start_time": time(15, 30), "end_time": time(18, 30)},
 ]
 
 
