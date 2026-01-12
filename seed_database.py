@@ -640,14 +640,17 @@ async def seed_mess_menu():
     print("Mess menu seeding successful!")
 
 async def seed_schedule():
-    print("Starting schedule seeding process...")
-    wipe_query = schedule_items_table.delete()
-    await database.execute(wipe_query)
+    check_query = schedule_items_table.select().limit(1)
+    existing_item = await database.fetch_one(check_query)
+    
+    if existing_item:
+        print("Schedule already exists. Skipping to protect user subscriptions.")
+        return
 
+    print("Starting schedule seeding process...")
     insert_query = schedule_items_table.insert()
     await database.execute_many(query=insert_query, values=SCHEDULE_DATA)
-        
-    print("Schedule seeding successful!")
+    print("Schedule seeded.")
 
 async def main():
     print("Starting seeding...")
