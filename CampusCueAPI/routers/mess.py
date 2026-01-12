@@ -48,11 +48,17 @@ async def get_my_menu(
 
 
 @router.get("", response_model=List[MessMenuItem])
-async def get_full_menu_by_cycle(cycle: str):
-    logger.info("Fetching full menu...")
+async def get_full_menu_by_cycle(
+    cycle: str,
+    current_user: User = Depends(get_current_user)
+):
+    logger.info(f"Fetching full PERSONALIZED menu for cycle: {cycle} for user {current_user.email}")
 
     query = mess_menu_items_table.select().where(
-        mess_menu_items_table.c.cycle_type == cycle
+        sqlalchemy.and_(
+            mess_menu_items_table.c.cycle_type == cycle,
+            mess_menu_items_table.c.menu_type == current_user.diet_type 
+        )
     )
 
     return await database.fetch_all(query)
