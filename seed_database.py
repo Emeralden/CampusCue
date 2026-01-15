@@ -624,7 +624,7 @@ SCHEDULE_DATA = [
     # Friday
     {"day_of_week": "friday", "item_type": "class", "course_type": "la", "name": "Macroeconomics", "room": "L101", "start_time": time(8, 30), "end_time": time(9, 30)},
     {"day_of_week": "friday", "item_type": "class", "course_type": "core", "name": "AST", "room": "L102", "start_time": time(9, 30), "end_time": time(10, 30)},
-    {"day_of_week": "friday", "item_type": "class", "course_type": "elective", "name": "Power Quality", "room": "L102?", "start_time": time(11, 30), "end_time": time(12, 30)},
+    {"day_of_week": "friday", "item_type": "class", "course_type": "elective", "name": "Power Quality", "room": "L105", "start_time": time(10, 30), "end_time": time(11, 30)},
     {"day_of_week": "friday", "item_type": "class", "course_type": "core", "name": "DIP", "room": "L102", "start_time": time(14, 30), "end_time": time(15, 30)},
     {"day_of_week": "friday", "item_type": "lab", "course_type": "core", "name": "Instrumentation Lab", "room": "SID, ED1 Lvl-3", "start_time": time(15, 30), "end_time": time(18, 30)},
 ]
@@ -640,17 +640,26 @@ async def seed_mess_menu():
     print("Mess menu seeding successful!")
 
 async def seed_schedule():
-    check_query = schedule_items_table.select().limit(1)
-    existing_item = await database.fetch_one(check_query)
+    print("Performing schedule sync...")
     
-    if existing_item:
-        print("Schedule already exists. Skipping to protect user subscriptions.")
-        return
-
-    print("Starting schedule seeding process...")
-    insert_query = schedule_items_table.insert()
-    await database.execute_many(query=insert_query, values=SCHEDULE_DATA)
-    print("Schedule seeded.")
+    for item_data in SCHEDULE_DATA:
+        find_query = schedule_items_table.select().where(schedule_items_table.c.name == item_data["name"])
+        existing_item = await database.fetch_one(find_query)
+        
+        if existing_item:
+            print(f"Updating existing course: {item_data['name']}")
+            update_query = (
+                schedule_items_table.update()
+                .where(schedule_items_table.c.id == existing_item["id"])
+                .values(**item_data)
+            )
+            await database.execute(update_query)
+        else:
+            print(f"Adding new course: {item_data['name']}")
+            insert_query = schedule_items_table.insert().values(**item_data)
+            await database.execute(insert_query)
+            
+    print("Schedule sync complete.")
 
 async def main():
     print("Starting seeding...")
