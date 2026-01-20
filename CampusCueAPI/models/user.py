@@ -21,6 +21,7 @@ class TokenRefresh(BaseModel):
 class DietType(str, Enum):
     VEG = "veg"
     NON_VEG = "non_veg"
+    EGG = "egg"
 
 class UserProfileUpdate(BaseModel):
     full_name: Optional[str] = None

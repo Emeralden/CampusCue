@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Leaf, Drumstick, CheckCircle } from 'lucide-react';
+import { Leaf, Drumstick, Egg, CheckCircle } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import apiClient from '@/apiClient';
 
@@ -74,16 +74,35 @@ export default function DietaryChoice({
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-4">
-        <motion.div whileHover={{ scale: 1.05 }} onClick={() => handleSelect('veg')} className={`relative p-6 glass rounded-2xl cursor-pointer border-2 transition-all ${activeDiet === 'veg' ? 'border-green-400 neon-glow-green' : 'border-gray-600/50'}`}>
-          <Leaf className="w-12 h-12 text-green-400 mx-auto mb-3" />
-          <h3 className="text-xl font-bold text-white text-center">Veggie</h3>
-          {activeDiet === 'veg' && <CheckCircle className="absolute top-3 right-3 w-5 h-5 text-green-400" />}
+      <div className="space-y-4">
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          onClick={() => handleSelect('veg')}
+          className={`relative p-4 flex items-center gap-4 glass rounded-xl cursor-pointer border-2 transition-all ${activeDiet === 'veg' ? 'border-green-400 neon-glow-green' : 'border-gray-600/50'}`}
+        >
+          <Leaf className="w-8 h-8 text-green-400 flex-shrink-0" />
+          <h3 className="text-lg font-bold text-white">Vegetarian</h3>
+          {activeDiet === 'veg' && <CheckCircle className="absolute top-1/2 -translate-y-1/2 right-4 w-5 h-5 text-green-400" />}
         </motion.div>
-        <motion.div whileHover={{ scale: 1.05 }} onClick={() => handleSelect('non_veg')} className={`relative p-6 glass rounded-2xl cursor-pointer border-2 transition-all ${activeDiet === 'non_veg' ? 'border-orange-400 neon-glow-orange' : 'border-gray-600/50'}`}>
-          <Drumstick className="w-12 h-12 text-orange-400 mx-auto mb-3" />
-          <h3 className="text-xl font-bold text-white text-center">Meat</h3>
-          {activeDiet === 'non_veg' && <CheckCircle className="absolute top-3 right-3 w-5 h-5 text-orange-400" />}
+        
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          onClick={() => handleSelect('egg')}
+          className={`relative p-4 flex items-center gap-4 glass rounded-xl cursor-pointer border-2 transition-all ${activeDiet === 'egg' ? 'border-yellow-400 neon-glow-yellow' : 'border-gray-600/50'}`}
+        >
+          <Egg className="w-8 h-8 text-yellow-400 flex-shrink-0" />
+          <h3 className="text-lg font-bold text-white">Eggetarian</h3>
+          {activeDiet === 'egg' && <CheckCircle className="absolute top-1/2 -translate-y-1/2 right-4 w-5 h-5 text-yellow-400" />}
+        </motion.div>
+
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          onClick={() => handleSelect('non_veg')}
+          className={`relative p-4 flex items-center gap-4 glass rounded-xl cursor-pointer border-2 transition-all ${activeDiet === 'non_veg' ? 'border-orange-400 neon-glow-orange' : 'border-gray-600/50'}`}
+        >
+          <Drumstick className="w-8 h-8 text-orange-400 flex-shrink-0" />
+          <h3 className="text-lg font-bold text-white">Non-Vegetarian</h3>
+          {activeDiet === 'non_veg' && <CheckCircle className="absolute top-1/2 -translate-y-1/2 right-4 w-5 h-5 text-orange-400" />}
         </motion.div>
       </div>
 

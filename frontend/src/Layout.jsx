@@ -87,7 +87,7 @@ export default function Layout({ children}) {
         }
 
         .neon-glow-yellow {
-          box-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
+          box-shadow: 0 0 20px rgba(250, 204, 21, 0.3);
         }
         
         .neon-glow-green {
