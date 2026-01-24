@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 @router.post("/register", status_code=status.HTTP_201_CREATED)
 async def register(user: UserIn):
     if await get_user(user.email):
-        logger.warning(f"Registartion attempt for existing email:{user.email}")
+        logger.warning(f"Registration attempt for existing email:{user.email}")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="A user with this email already exists."
