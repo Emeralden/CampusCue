@@ -3,7 +3,7 @@ import sqlalchemy
 
 from .config import settings
 
-metadata = sqlalchemy.MetaData()
+metadata = sqlalchemy.MetaData(schema="public")
 
 users_table = sqlalchemy.Table (
     "users",
