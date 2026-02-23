@@ -34,7 +34,7 @@ export default function LoginPage() {
       localStorage.setItem('refreshToken', data.refresh_token);
       navigate('/');
     } catch (err) {
-      setError('Incorrect email or password.');
+      setError(err.response?.data?.detail || 'Incorrect email or password.');
       setIsLoading(false);
     }
   };
