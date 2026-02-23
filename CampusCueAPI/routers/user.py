@@ -1,13 +1,24 @@
 import logging
-from fastapi import APIRouter, HTTPException, status, Depends
+
+from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
+
 from ..database import database, users_table
-from ..models.user import User, UserIn, TokenRefresh, UserProfileUpdate
-from ..security import get_user, get_password_hash, authenticate_user, create_access_token, get_current_user, create_refresh_token, get_current_user_from_refresh_token
+from ..models.user import TokenRefresh, User, UserIn, UserProfileUpdate
+from ..security import (
+    authenticate_user,
+    create_access_token,
+    create_refresh_token,
+    get_current_user,
+    get_current_user_from_refresh_token,
+    get_password_hash,
+    get_user,
+)
 
 router = APIRouter()
 
 logger = logging.getLogger(__name__)
+
 
 @router.post("/register", status_code=status.HTTP_201_CREATED)
 async def register(user: UserIn):
@@ -15,13 +26,13 @@ async def register(user: UserIn):
         logger.warning(f"Registration attempt for existing email:{user.email}")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="A user with this email already exists."
+            detail="A user with this email already exists.",
         )
-    
+
     hashed_password = get_password_hash(user.password)
 
     query = users_table.insert().values(
-        email=user.email,
+        email=user.email.strip().lower(),
         full_name=user.full_name,
         hashed_password=hashed_password,
         mess_cycle=user.mess_cycle,
@@ -33,10 +44,13 @@ async def register(user: UserIn):
 
     return {"detail": "User created successfully!"}
 
+
 @router.post("/token")
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = await authenticate_user(email=form_data.username, password=form_data.password)
-    
+    user = await authenticate_user(
+        email=form_data.username, password=form_data.password
+    )
+
     access_token = create_access_token(data={"sub": user["email"]})
     refresh_token = create_refresh_token(data={"sub": user["email"]})
 
@@ -52,20 +66,23 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     return {
         "access_token": access_token,
         "refresh_token": refresh_token,
-        "token_type": "bearer"
+        "token_type": "bearer",
     }
+
 
 @router.post("/token/refresh")
 async def refresh_access_token(refresh: TokenRefresh):
     user = await get_current_user_from_refresh_token(refresh.refresh_token)
-    
+
     access_token = create_access_token(data={"sub": user["email"]})
-    
+
     return {"access_token": access_token, "token_type": "bearer"}
+
 
 @router.get("/me", response_model=User)
 async def get_me(current_user: User = Depends(get_current_user)):
     return current_user
+
 
 @router.post("/me/toggle-mess-cycle", response_model=User)
 async def toggle_mess_cycle(current_user: User = Depends(get_current_user)):
@@ -82,6 +99,7 @@ async def toggle_mess_cycle(current_user: User = Depends(get_current_user)):
 
     return await get_user(current_user.email)
 
+
 @router.post("/me/toggle-diet", response_model=User)
 async def toggle_dietary_preference(current_user: User = Depends(get_current_user)):
     logger.info(f"User {current_user.email} toggling dietary preference.")
@@ -96,6 +114,7 @@ async def toggle_dietary_preference(current_user: User = Depends(get_current_use
     await database.execute(update_query)
 
     return await get_user(current_user.email)
+
 
 @router.patch("/me/profile", response_model=User)
 async def update_user_profile(

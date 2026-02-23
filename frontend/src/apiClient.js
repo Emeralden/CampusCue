@@ -23,16 +23,16 @@ apiClient.interceptors.response.use(
     const originalRequest = error.config;
 
     if (
-  error.response?.status === 401 &&
-  !originalRequest._retry &&
-  !originalRequest.url.includes('/users/token/refresh')
-)
-
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      !originalRequest.url.includes('/users/token/refresh')
+    ) {
+      originalRequest._retry = true;
       try {
         const refreshToken = localStorage.getItem('refreshToken');
         if (!refreshToken) {
             localStorage.removeItem('accessToken');
-            window.location.href = '/login';
+            window.location.href = '/';
             return Promise.reject(error);
         }
 
@@ -47,11 +47,11 @@ apiClient.interceptors.response.use(
         return apiClient(originalRequest);
         
       } catch (refreshError) {
-  localStorage.removeItem('accessToken');
-  localStorage.removeItem('refreshToken');
-  window.location.replace('/login');
-  return new Promise(() => {});
-}
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        window.location.href = '/';
+        return Promise.reject(refreshError);
+      }
     }
 
     return Promise.reject(error);
