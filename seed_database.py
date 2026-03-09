@@ -28,7 +28,7 @@ MENU_DATA: List[Dict[str, str]] = [
     "day_of_week": "monday",
     "meal_type": "dinner",
     "menu_type": "veg",
-    "description": "Palak Paneer + Fruit Custard"
+    "description": "Paneer + Fruit Custard"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -175,7 +175,7 @@ MENU_DATA: List[Dict[str, str]] = [
     "day_of_week": "monday",
     "meal_type": "dinner",
     "menu_type": "veg",
-    "description": "Palak panner + Fruit Custard"
+    "description": "Panner + Fruit Custard"
   },
   {
     "cycle_type": "weeks_2_4",
@@ -322,7 +322,7 @@ MENU_DATA: List[Dict[str, str]] = [
     "day_of_week": "monday",
     "meal_type": "dinner",
     "menu_type": "non_veg",
-    "description": "Palak Panner + Fruit Custard"
+    "description": "Panner + Fruit Custard"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -469,7 +469,7 @@ MENU_DATA: List[Dict[str, str]] = [
     "day_of_week": "monday",
     "meal_type": "dinner",
     "menu_type": "non_veg",
-    "description": "Palak panner + Fruit Custard"
+    "description": "Panner + Fruit Custard"
   },
   {
     "cycle_type": "weeks_2_4",
@@ -616,7 +616,7 @@ MENU_DATA: List[Dict[str, str]] = [
     "day_of_week": "monday",
     "meal_type": "dinner",
     "menu_type": "egg",
-    "description": "Palak Paneer + Fruit Custard"
+    "description": "Paneer + Fruit Custard"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -763,7 +763,7 @@ MENU_DATA: List[Dict[str, str]] = [
     "day_of_week": "monday",
     "meal_type": "dinner",
     "menu_type": "egg",
-    "description": "Palak panner + Fruit Custard"
+    "description": "Panner + Fruit Custard"
   },
   {
     "cycle_type": "weeks_2_4",
