@@ -5,7 +5,7 @@ import SatisfactionModal from '../Components/SatisfactionModal';
 import CycleToggleReminderModal from '../Components/CycleToggleReminderModal';
 import UserHub from '../Components/UserHub.jsx';
 import apiClient from '@/apiClient';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import { format, subDays, startOfWeek } from 'date-fns';
 import { AnimatePresence } from 'framer-motion';
 
@@ -66,6 +66,7 @@ export default function Dashboard() {
 
   const [showCycleReminder, setShowCycleReminder] = useState(false);
   const [cycleReminderIsAuto, setCycleReminderIsAuto] = useState(false);
+  const [confirmedCycleName, setConfirmedCycleName] = useState('');
 
   useEffect(() => {
     if (!currentUser) return;
@@ -91,6 +92,21 @@ export default function Dashboard() {
     setShowCycleReminder(true);
   }, [currentUser]);
 
+  const manualToggleMutation = useMutation({
+    mutationFn: async () => {
+      const { data } = await apiClient.post('/users/me/toggle-mess-cycle');
+      return data;
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['myMenu'] });
+      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+      const name = data.mess_cycle === 'weeks_1_3' ? 'Weeks 1 & 3' : 'Weeks 2 & 4';
+      setConfirmedCycleName(name);
+      setCycleReminderIsAuto(false);
+      setShowCycleReminder(true);
+    },
+  });
+
   const dismissCycleReminder = () => {
     if (cycleReminderIsAuto) {
       const now = new Date();
@@ -98,6 +114,7 @@ export default function Dashboard() {
       localStorage.setItem('cycleReminderMonday', format(currentMonday, 'yyyy-MM-dd'));
     }
     setCycleReminderIsAuto(false);
+    setConfirmedCycleName('');
     setShowCycleReminder(false);
   };
 
@@ -107,8 +124,8 @@ export default function Dashboard() {
   };
 
   const handleManualToggle = () => {
-    setCycleReminderIsAuto(false);
-    setShowCycleReminder(true);
+    if (manualToggleMutation.isPending) return;
+    manualToggleMutation.mutate();
   };
 
   const handleMoodLogged = () => {
@@ -162,7 +179,8 @@ export default function Dashboard() {
             currentCycle={currentUser.mess_cycle}
             onToggled={handleCycleToggled}
             onDismiss={dismissCycleReminder}
-            autoToggle={!cycleReminderIsAuto}
+            confirmOnly={!cycleReminderIsAuto}
+            confirmedCycleName={confirmedCycleName}
           />
         )}
       </AnimatePresence>

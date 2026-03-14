@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Repeat } from 'lucide-react';
 import apiClient from '@/apiClient';
 
-export default function CycleToggleReminderModal({ onToggled, onDismiss, currentCycle, autoToggle = false }) {
-  const [toggled, setToggled] = useState(false);
+export default function CycleToggleReminderModal({ onToggled, onDismiss, currentCycle, confirmOnly = false, confirmedCycleName = '' }) {
+  const [toggled, setToggled] = useState(confirmOnly);
   const queryClient = useQueryClient();
-  const hasFired = useRef(false);
 
   const toggleCycleMutation = useMutation({
     mutationFn: async () => {
@@ -25,11 +24,13 @@ export default function CycleToggleReminderModal({ onToggled, onDismiss, current
   });
 
   useEffect(() => {
-    if (autoToggle && !hasFired.current) {
-      hasFired.current = true;
-      toggleCycleMutation.mutate();
+    if (confirmOnly) {
+      const timer = setTimeout(() => {
+        if (onToggled) onToggled();
+      }, 1200);
+      return () => clearTimeout(timer);
     }
-  }, [autoToggle]);
+  }, [confirmOnly]);
 
   const handleToggle = () => {
     if (toggleCycleMutation.isPending) return;
@@ -37,10 +38,11 @@ export default function CycleToggleReminderModal({ onToggled, onDismiss, current
   };
 
   const targetCycle = currentCycle === 'weeks_1_3' ? 'Weeks 2 & 4' : 'Weeks 1 & 3';
+  const displayCycle = confirmOnly ? confirmedCycleName : targetCycle;
 
   return (
     <>
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm" onClick={onDismiss} />
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm" onClick={confirmOnly ? onToggled : onDismiss} />
       <motion.div initial={{ opacity: 0, y: 30, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 30, scale: 0.95 }} className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div className="w-full max-w-md glass rounded-3xl p-6 border border-orange-400/30 shadow-2xl neon-glow-orange">
           <div className="text-center">
@@ -51,14 +53,7 @@ export default function CycleToggleReminderModal({ onToggled, onDismiss, current
                     <Repeat className="w-14 h-14 text-green-400" />
                   </motion.div>
                   <p className="font-bold text-green-400 mt-4 text-lg">Switched!</p>
-                  <p className="text-gray-400 text-sm mt-1">Showing {targetCycle}</p>
-                </motion.div>
-              ) : autoToggle ? (
-                <motion.div key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center justify-center py-4">
-                  <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}>
-                    <Repeat className="w-10 h-10 text-orange-400" />
-                  </motion.div>
-                  <p className="text-gray-400 text-sm mt-3">Switching...</p>
+                  <p className="text-gray-400 text-sm mt-1">Showing {displayCycle}</p>
                 </motion.div>
               ) : (
                 <motion.div key="prompt" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
