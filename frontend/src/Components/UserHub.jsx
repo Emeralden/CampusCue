@@ -2,25 +2,10 @@ import React, { useState } from 'react';
 import { Settings, TrendingUp, LogOut, SlidersHorizontal, Repeat } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
-import apiClient from '@/apiClient';
 
-export default function UserHub() {
+export default function UserHub({ onToggleMenu }) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
-
-  const toggleCycleMutationFn = async () => {
-    const { data } = await apiClient.post('/users/me/toggle-mess-cycle');
-    return data;
-  };
-
-  const toggleCycleMutation = useMutation({
-    mutationFn: toggleCycleMutationFn,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['myMenu'] });
-    },
-  });
 
   const handleLogout = () => {
   localStorage.removeItem('accessToken');
@@ -32,7 +17,7 @@ export default function UserHub() {
     {
       icon: Repeat,
       label: 'Toggle Menu',
-      onClick: () => toggleCycleMutation.mutate(),
+      onClick: () => { if (onToggleMenu) onToggleMenu(); },
       color: 'text-orange-400'
     },
 
@@ -42,11 +27,11 @@ export default function UserHub() {
       onClick: () => navigate('/satisfaction'),
       color: 'text-purple-400'
     },
-    { 
-      icon: Settings, 
-      label: 'Settings', 
-      onClick: () => navigate('/settings'), 
-      color: 'text-gray-400' 
+    {
+      icon: Settings,
+      label: 'Settings',
+      onClick: () => navigate('/settings'),
+      color: 'text-gray-400'
     },
     {
       icon: LogOut,

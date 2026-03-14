@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Greeting from '../Components/Greeting';
 import CurrentDayOverview from '../Components/CurrentDayOverview';
 import SatisfactionModal from '../Components/SatisfactionModal';
+import CycleToggleReminderModal from '../Components/CycleToggleReminderModal';
 import UserHub from '../Components/UserHub.jsx';
 import apiClient from '@/apiClient';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { format, subDays } from 'date-fns';
+import { format, subDays, startOfWeek } from 'date-fns';
 import { AnimatePresence } from 'framer-motion';
 
 const fetchSatisfactionHistory = async () => {
@@ -63,6 +64,50 @@ export default function Dashboard() {
     checkForMissedMoodLogs();
   }, [allLogs, currentUser]);
 
+  const [showCycleReminder, setShowCycleReminder] = useState(false);
+  const [cycleReminderIsAuto, setCycleReminderIsAuto] = useState(false);
+
+  useEffect(() => {
+    if (!currentUser) return;
+
+    const now = new Date();
+    const currentMonday = startOfWeek(now, { weekStartsOn: 1 });
+    const currentMondayStr = format(currentMonday, 'yyyy-MM-dd');
+
+    const storedMondayStr = localStorage.getItem('cycleReminderMonday');
+
+    if (storedMondayStr === currentMondayStr) return;
+
+    if (storedMondayStr) {
+      const prevMonday = subDays(currentMonday, 7);
+      const prevMondayStr = format(prevMonday, 'yyyy-MM-dd');
+      if (storedMondayStr !== prevMondayStr) return;
+    }
+
+    setCycleReminderIsAuto(true);
+    setShowCycleReminder(true);
+  }, [currentUser]);
+
+  const dismissCycleReminder = () => {
+    if (cycleReminderIsAuto) {
+      const now = new Date();
+      const currentMonday = startOfWeek(now, { weekStartsOn: 1 });
+      localStorage.setItem('cycleReminderMonday', format(currentMonday, 'yyyy-MM-dd'));
+    }
+    setCycleReminderIsAuto(false);
+    setShowCycleReminder(false);
+  };
+
+  const handleCycleToggled = () => {
+    dismissCycleReminder();
+    queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+  };
+
+  const handleManualToggle = () => {
+    setCycleReminderIsAuto(false);
+    setShowCycleReminder(true);
+  };
+
   const handleMoodLogged = () => {
     setShowSatisfactionModal(false);
     setPromptDate(null);
@@ -93,7 +138,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-900 px-4 py-8 relative">
       <div className="absolute top-2 left-2 z-10">
-        <UserHub />
+        <UserHub onToggleMenu={handleManualToggle} />
       </div>
       <div className="max-w-2xl mx-auto space-y-10">
         <Greeting />
@@ -101,10 +146,20 @@ export default function Dashboard() {
       </div>
       <AnimatePresence>
         {showSatisfactionModal && promptDate && (
-          <SatisfactionModal 
+          <SatisfactionModal
             date={promptDate}
             onSuccess={handleMoodLogged}
             onCancel={handleCancelPrompt}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {showCycleReminder && !showSatisfactionModal && currentUser && (
+          <CycleToggleReminderModal
+            currentCycle={currentUser.mess_cycle}
+            onToggled={handleCycleToggled}
+            onDismiss={dismissCycleReminder}
+            autoToggle={!cycleReminderIsAuto}
           />
         )}
       </AnimatePresence>
