@@ -76,13 +76,16 @@ export default function Dashboard() {
 
     const storedMondayStr = localStorage.getItem('cycleReminderMonday');
 
+    if (!storedMondayStr) {
+      localStorage.setItem('cycleReminderMonday', currentMondayStr);
+      return;
+    }
+
     if (storedMondayStr === currentMondayStr) return;
 
-    if (storedMondayStr) {
-      const prevMonday = subDays(currentMonday, 7);
-      const prevMondayStr = format(prevMonday, 'yyyy-MM-dd');
-      if (storedMondayStr !== prevMondayStr) return;
-    }
+    const prevMonday = subDays(currentMonday, 7);
+    const prevMondayStr = format(prevMonday, 'yyyy-MM-dd');
+    if (storedMondayStr !== prevMondayStr) return;
 
     setCycleReminderIsAuto(true);
     setShowCycleReminder(true);

@@ -53,6 +53,13 @@ export default function CycleToggleReminderModal({ onToggled, onDismiss, current
                   <p className="font-bold text-green-400 mt-4 text-lg">Switched!</p>
                   <p className="text-gray-400 text-sm mt-1">Showing {targetCycle}</p>
                 </motion.div>
+              ) : autoToggle ? (
+                <motion.div key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center justify-center py-4">
+                  <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}>
+                    <Repeat className="w-10 h-10 text-orange-400" />
+                  </motion.div>
+                  <p className="text-gray-400 text-sm mt-3">Switching...</p>
+                </motion.div>
               ) : (
                 <motion.div key="prompt" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                   <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-4">
@@ -76,14 +83,17 @@ export default function CycleToggleReminderModal({ onToggled, onDismiss, current
                       {toggleCycleMutation.isPending ? 'Switching...' : 'Toggle Menu'}
                     </motion.button>
 
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={onDismiss}
-                      className="px-4 py-2 text-sm text-gray-400 hover:text-gray-300"
-                    >
-                      Not now
-                    </motion.button>
+                    <div className="flex flex-col items-center gap-1 mt-2">
+                      <p className="text-gray-500 text-xs">Already matching with the mess?</p>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={onDismiss}
+                        className="px-4 py-2 text-sm text-gray-400 hover:text-gray-300"
+                      >
+                        Not now
+                      </motion.button>
+                    </div>
                   </div>
                 </motion.div>
               )}
