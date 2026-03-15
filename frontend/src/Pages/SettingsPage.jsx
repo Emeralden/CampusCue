@@ -3,8 +3,9 @@ import { motion } from 'framer-motion';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import apiClient from '@/apiClient';
-import { ArrowLeft, User, Leaf, Bell } from 'lucide-react';
+import { ArrowLeft, User, Leaf, Bell, BookOpen } from 'lucide-react';
 import DietaryChoice from '../Components/DietaryChoice';
+import CourseSelection from '../Components/CourseSelection';
 
 const fetchCurrentUser = async () => {
   const { data } = await apiClient.get('/users/me');
@@ -88,6 +89,11 @@ export default function SettingsPage() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass rounded-2xl p-6 border border-gray-700">
+            <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2"><BookOpen className="w-5 h-5 text-cyan-400" /> Electives & LAs</h2>
+            <CourseSelection showButton={false} />
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="glass rounded-2xl p-6 border border-gray-700">
             <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2"><Bell className="w-5 h-5 text-cyan-400" /> Notifications</h2>
             <div className="flex items-center justify-between">
               <p className="text-gray-300">Enable daily satisfaction prompt</p>

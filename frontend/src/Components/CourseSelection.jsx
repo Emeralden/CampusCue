@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import apiClient from '@/apiClient';
@@ -9,21 +9,36 @@ const fetchElectives = async () => {
   return data;
 };
 
+const fetchMySubscriptions = async () => {
+  const { data } = await apiClient.get('/schedule/subscriptions');
+  return data;
+};
+
 const saveSubscriptions = async (schedule_item_ids) => {
   const { data } = await apiClient.post('/schedule/subscriptions', { schedule_item_ids });
   return data;
 };
 
-export default function CourseSelection({ onComplete }) {
-  const { data: allCourses, isLoading } = useQuery({ queryKey: ['electives'], queryFn: fetchElectives });
+export default function CourseSelection({ onComplete, showButton = true }) {
+  const { data: allCourses, isLoading: coursesLoading } = useQuery({ queryKey: ['electives'], queryFn: fetchElectives });
+  const { data: existingIds, isLoading: subsLoading } = useQuery({ queryKey: ['mySubscriptions'], queryFn: fetchMySubscriptions });
   const [selectedIds, setSelectedIds] = useState([]);
   const [clashError, setClashError] = useState(null);
   const queryClient = useQueryClient();
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (existingIds && !initialized.current) {
+      setSelectedIds(existingIds);
+      initialized.current = true;
+    }
+  }, [existingIds]);
 
   const mutation = useMutation({
     mutationFn: saveSubscriptions,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['mySchedule'] });
+      queryClient.invalidateQueries({ queryKey: ['mySubscriptions'] });
       if (onComplete) onComplete();
     },
     onError: (error) => {
@@ -45,8 +60,8 @@ export default function CourseSelection({ onComplete }) {
     }, {});
     }, [allCourses]);
 
-  const detectClash = (newCourse) => {
-    const selectedCourses = allCourses.filter(c => selectedIds.includes(c.id));
+  const detectClash = (newCourse, currentIds) => {
+    const selectedCourses = allCourses.filter(c => currentIds.includes(c.id));
     for (const existingCourse of selectedCourses) {
       if (newCourse.day_of_week === existingCourse.day_of_week) {
         const newStart = newCourse.start_time;
@@ -67,30 +82,37 @@ export default function CourseSelection({ onComplete }) {
     const allItemIds = courseGroup.items.map(item => item.id);
     const isFullySelected = allItemIds.every(id => selectedIds.includes(id));
 
+    let newIds;
     if (isFullySelected) {
-        setSelectedIds(selectedIds.filter(id => !allItemIds.includes(id)));
+        newIds = selectedIds.filter(id => !allItemIds.includes(id));
     } else {
         for (const item of courseGroup.items) {
-        const clash = detectClash(item);
+        const clash = detectClash(item, selectedIds.filter(id => !allItemIds.includes(id)));
         if (clash) {
             setClashError(clash);
             return;
         }
         }
-        setSelectedIds([...new Set([...selectedIds, ...allItemIds])]);
+        newIds = [...new Set([...selectedIds, ...allItemIds])];
     }
-    };
+
+    setSelectedIds(newIds);
+
+    if (!showButton) {
+      mutation.mutate(newIds);
+    }
+  };
 
   const handleSubmit = () => {
     mutation.mutate(selectedIds);
   };
 
-  if (isLoading) return <p className="text-gray-400">Loading courses...</p>;
+  if (coursesLoading || subsLoading) return <p className="text-gray-400">Loading courses...</p>;
 
   return (
     <div className="w-full">
         {Object.values(groupedCourses).length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {Object.values(groupedCourses).map(courseGroup => {
             const { details, items } = courseGroup;
             const allItemIds = items.map(item => item.id);
@@ -122,14 +144,16 @@ export default function CourseSelection({ onComplete }) {
           </motion.div>
         )}
       </AnimatePresence>
-      
-      <motion.button
-        onClick={handleSubmit}
-        disabled={mutation.isLoading}
-        className="w-full py-4 mt-8 rounded-xl font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 transition-all disabled:opacity-50"
-      >
-        {mutation.isLoading ? 'Saving...' : 'Confirm my courses'}
-      </motion.button>
+
+      {showButton && (
+        <motion.button
+          onClick={handleSubmit}
+          disabled={mutation.isLoading}
+          className="w-full py-4 mt-8 rounded-xl font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 transition-all disabled:opacity-50"
+        >
+          {mutation.isLoading ? 'Saving...' : 'Confirm my courses'}
+        </motion.button>
+      )}
     </div>
   );
 }
