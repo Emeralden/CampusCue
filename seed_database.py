@@ -4,6 +4,8 @@ import sys
 from typing import List, Dict
 from datetime import time
 
+import sqlalchemy
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from CampusCueAPI.database import database, mess_menu_items_table, schedule_items_table
@@ -937,7 +939,14 @@ async def seed_schedule():
     print("Performing schedule sync...")
     
     for item_data in SCHEDULE_DATA:
-        find_query = schedule_items_table.select().where(schedule_items_table.c.name == item_data["name"])
+        find_query = schedule_items_table.select().where(
+            sqlalchemy.and_(
+                schedule_items_table.c.name == item_data["name"],
+                schedule_items_table.c.day_of_week == item_data["day_of_week"],
+                schedule_items_table.c.start_time == item_data["start_time"]
+            )
+        )
+        
         existing_item = await database.fetch_one(find_query)
         
         if existing_item:
