@@ -88,16 +88,7 @@ satisfaction_logs_table = sqlalchemy.Table(
     sqlalchemy.UniqueConstraint("user_id", "log_date", name="uq_user_log_date"),
 )
 
-connect_args = {}
-pool_args = {}
-
-if is_sqlite:
-    print("Running in SQLite mode.")
-else:
-    pool_args["min_size"] = 1
-    pool_args["max_size"] = 97
-    print("Running in PostgreSQL mode.")
-
+connect_args = {"check_same_thread": False} if is_sqlite else {}
 
 engine = sqlalchemy.create_engine(
     settings.database_url,
@@ -106,4 +97,4 @@ engine = sqlalchemy.create_engine(
 
 metadata.create_all(engine)
 
-database = databases.Database(settings.database_url, **pool_args)
+database = databases.Database(settings.database_url)

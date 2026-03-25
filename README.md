@@ -21,9 +21,9 @@ The core of this project is a professional-grade backend API built from the grou
 
 *   **Secure User Authentication:** Complete registration and login system featuring a **seamless session refresh** mechanism using short-lived Access Tokens (JWT) and long-lived,       securely stored Refresh Tokens, using industry-standard password hashing (`passlib`) and JWTs (`python-jose`).
 *   **Personalized, Relational Data:** Architected a normalized database schema with **PostgreSQL** (Production) and **SQLite** (Dev) that powers all user-specific features,         including:
-    *   A **Course Subscription System** allowing users to select elective courses, complete with backend clash detection.
+    *   A **Course Subscription System** allowing users to select elective courses (both during onboarding and from settings), complete with backend clash detection.
     *   A complex **Class Schedule System** with date-based user overrides.
-    *   A dynamic **Mess Menu System** with user-specific dietary and cycle preferences (`veg`/`non-veg`).
+    *   A dynamic **Mess Menu System** with user-specific dietary preferences (`veg`/`non-veg`/`eggetarian`) and bi-weekly cycle selection, complete with **smart cycle-toggle reminders**.
     *   A personal **Satisfaction Logger** ("Hustle Meter").
 *   **Professional-Grade Logging:** A multi-environment, structured logging system (using JSON and `rich`) with correlation IDs for robust production debugging.
 *   **Automated CI:** A **GitHub Actions** workflow ensures code quality with automated linting (`ruff`) on every push.
