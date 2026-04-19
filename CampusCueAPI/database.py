@@ -1,7 +1,7 @@
 import databases
 import sqlalchemy
 
-from .config import settings
+from config import settings
 
 is_sqlite = settings.database_url.startswith("sqlite")
 metadata = sqlalchemy.MetaData() if is_sqlite else sqlalchemy.MetaData(schema="public")
@@ -86,6 +86,24 @@ satisfaction_logs_table = sqlalchemy.Table(
     sqlalchemy.Column("log_date", sqlalchemy.Date, nullable=False),
     sqlalchemy.Column("satisfaction_level", sqlalchemy.String, nullable=False),
     sqlalchemy.UniqueConstraint("user_id", "log_date", name="uq_user_log_date"),
+)
+
+tasks_table = sqlalchemy.Table(
+    "tasks",
+    metadata,
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
+    sqlalchemy.Column("user_id", sqlalchemy.ForeignKey("users.id")),
+    sqlalchemy.Column("title", sqlalchemy.String, nullable=False),
+    sqlalchemy.Column("is_completed", sqlalchemy.Boolean, default=False),
+    sqlalchemy.Column("due_date", sqlalchemy.DateTime)
+)
+
+notes_table = sqlalchemy.Table(
+    "notes",
+    metadata,
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
+    sqlalchemy.Column("user_id", sqlalchemy.ForeignKey("users.id")),
+    sqlalchemy.Column("content", sqlalchemy.Text, nullable=False)
 )
 
 connect_args = {"check_same_thread": False} if is_sqlite else {}

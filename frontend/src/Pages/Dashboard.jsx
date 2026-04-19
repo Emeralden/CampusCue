@@ -24,10 +24,13 @@ export default function Dashboard() {
   queryFn: async () => (await apiClient.get('/users/me')).data,
   });
 
-  const { data: allLogs, isLoading, isError } = useQuery({
+  const { data: allLogs = [] } = useQuery({
     queryKey: ['satisfactionHistory'],
     queryFn: fetchSatisfactionHistory,
+    enabled: !!currentUser?.enable_satisfaction_prompt,
     refetchInterval: 2 * 60 * 1000,
+    staleTime: 2 * 60 * 1000,
+    retry: 1,
   });
 
   useEffect(() => {
@@ -138,22 +141,6 @@ export default function Dashboard() {
   setShowSatisfactionModal(false);
   setPromptDate(null);
   };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <p className="text-gray-400">Loading Dashboard...</p>
-      </div>
-    );
-  }
-
-  if (isError) {
-    return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <p className="text-red-400">Could not connect to the server.</p>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gray-900 px-4 py-8 relative">
