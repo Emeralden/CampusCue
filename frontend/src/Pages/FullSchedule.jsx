@@ -114,8 +114,8 @@ export default function FullSchedule() {
         >
           {isLoading && <p className="text-center text-gray-400 pt-16">Loading schedule...</p>}
           {isError && <p className="text-center text-red-400 pt-16">Error loading schedule.</p>}
-          {!isLoading && !isError && scheduleData?.length > 0 ? (
-            scheduleData.map((item, index) => {
+          {!isLoading && !isError && scheduleData?.items?.length > 0 ? (
+            scheduleData.items.map((item, index) => {
               const timeRange = `${item.start_time.slice(0, 5)} - ${item.end_time.slice(0, 5)}`;
               return (
               <motion.div

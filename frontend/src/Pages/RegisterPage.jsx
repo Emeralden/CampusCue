@@ -59,6 +59,11 @@ export default function RegisterPage() {
       });
 
       localStorage.setItem('accessToken', loginData.access_token);
+      if (loginData.refresh_token) {
+        localStorage.setItem('refreshToken', loginData.refresh_token);
+      } else {
+        localStorage.removeItem('refreshToken');
+      }
 
       setSuccess(true);
       

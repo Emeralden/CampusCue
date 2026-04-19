@@ -11,7 +11,12 @@ from ..database import (
     schedule_overrides_table,
     user_schedule_table,
 )
-from ..models.schedule import CourseSubscription, ScheduleItem, ScheduleOverride
+from ..models.schedule import (
+    CourseSubscription,
+    DailyScheduleResponse,
+    ScheduleItem,
+    ScheduleOverride,
+)
 from ..models.user import User
 from ..security import get_current_user
 
@@ -173,7 +178,7 @@ async def delete_schedule_override(
     return None
 
 
-@router.get("/my-day", response_model=List[ScheduleItem])
+@router.get("/my-day", response_model=DailyScheduleResponse)
 async def get_my_daily_schedule(
     date_str: str = Query(..., alias="date"),
     current_user: User = Depends(get_current_user),
@@ -225,7 +230,11 @@ async def get_my_daily_schedule(
         core_items + subscribed_items, key=lambda item: item["start_time"]
     )
 
-    return full_schedule
+    return {
+        "schedule_day": day_to_fetch,
+        "has_override": active_override is not None,
+        "items": full_schedule,
+    }
 
 
 @router.get("", response_model=List[ScheduleItem])

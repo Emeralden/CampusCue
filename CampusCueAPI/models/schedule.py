@@ -24,3 +24,9 @@ class ScheduleItem(BaseModel):
 
 class CourseSubscription(BaseModel):
     schedule_item_ids: List[int]
+
+
+class DailyScheduleResponse(BaseModel):
+    schedule_day: str
+    has_override: bool
+    items: List[ScheduleItem]

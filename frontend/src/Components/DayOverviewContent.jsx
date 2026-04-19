@@ -131,7 +131,7 @@ export default function DayOverviewContent({ dayOffset = 0, showTimeAndStatus = 
     return <div className="text-center text-red-400 p-8">Error fetching daily overview. Please try again later.</div>;
   }
   
-  const scheduleWithStatus = scheduleData?.map(item => ({
+  const scheduleWithStatus = scheduleData?.items?.map(item => ({
     ...item,
     status: getTimeStatus(item.start_time, item.end_time)
   })) || [];
@@ -199,7 +199,7 @@ export default function DayOverviewContent({ dayOffset = 0, showTimeAndStatus = 
               </motion.div>
             </Link>
           </div>
-          {scheduleData?.has_override && (
+          {scheduleData?.has_override && scheduleData?.schedule_day && (
             <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="text-center p-3 glass rounded-xl border border-orange-400/50">
               <p className="text-orange-300 font-semibold text-sm">Following {scheduleData.schedule_day.charAt(0).toUpperCase() + scheduleData.schedule_day.slice(1)}'s schedule</p>
             </motion.div>
