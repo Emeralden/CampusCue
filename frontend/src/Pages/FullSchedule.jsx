@@ -31,7 +31,7 @@ export default function FullSchedule() {
     targetDate.setDate(today.getDate() + dateOffset);
     const dateStr = format(targetDate, 'yyyy-MM-dd');
     
-    return (await apiClient.get(`/schedule/my-day?date=${dateStr}`)).data;
+    return (await apiClient.get(`/schedule/my-day-details?date=${dateStr}`)).data;
   },
   staleTime: 5 * 60 * 1000,
 });

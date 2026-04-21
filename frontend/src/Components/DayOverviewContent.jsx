@@ -20,7 +20,7 @@ const fetchMyMenu = async (dateStr) => {
 };
 
 const fetchMySchedule = async (dateStr) => {
-  const { data } = await apiClient.get(`/schedule/my-day?date=${dateStr}`);
+  const { data } = await apiClient.get(`/schedule/my-day-details?date=${dateStr}`);
   return data;
 };
 

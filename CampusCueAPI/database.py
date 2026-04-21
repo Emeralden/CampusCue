@@ -1,7 +1,7 @@
 import databases
 import sqlalchemy
 
-from config import settings
+from .config import settings
 
 is_sqlite = settings.database_url.startswith("sqlite")
 metadata = sqlalchemy.MetaData() if is_sqlite else sqlalchemy.MetaData(schema="public")

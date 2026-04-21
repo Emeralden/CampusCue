@@ -178,7 +178,7 @@ async def delete_schedule_override(
     return None
 
 
-@router.get("/my-day", response_model=DailyScheduleResponse)
+@router.get("/my-day", response_model=List[ScheduleItem])
 async def get_my_daily_schedule(
     date_str: str = Query(..., alias="date"),
     current_user: User = Depends(get_current_user),
@@ -201,6 +201,56 @@ async def get_my_daily_schedule(
     logger.info(
         f"Fetching V2 schedule for user {current_user.email} on day {day_to_fetch}"
     )
+
+    core_query = schedule_items_table.select().where(
+        sqlalchemy.and_(
+            schedule_items_table.c.day_of_week == day_to_fetch,
+            schedule_items_table.c.course_type == "core",
+        )
+    )
+
+    subscribed_query = (
+        schedule_items_table.select()
+        .join(
+            user_schedule_table,
+            schedule_items_table.c.id == user_schedule_table.c.schedule_item_id,
+        )
+        .where(
+            sqlalchemy.and_(
+                user_schedule_table.c.user_id == current_user.id,
+                schedule_items_table.c.day_of_week == day_to_fetch,
+            )
+        )
+    )
+
+    core_items = await database.fetch_all(core_query)
+    subscribed_items = await database.fetch_all(subscribed_query)
+
+    full_schedule = sorted(
+        core_items + subscribed_items, key=lambda item: item["start_time"]
+    )
+
+    return full_schedule
+
+
+@router.get("/my-day-details", response_model=DailyScheduleResponse)
+async def get_my_daily_schedule_details(
+    date_str: str = Query(..., alias="date"),
+    current_user: User = Depends(get_current_user),
+):
+    target_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+
+    override_query = schedule_overrides_table.select().where(
+        sqlalchemy.and_(
+            schedule_overrides_table.c.user_id == current_user.id,
+            schedule_overrides_table.c.override_date == target_date,
+        )
+    )
+    active_override = await database.fetch_one(override_query)
+
+    day_to_fetch = target_date.strftime("%A").lower()
+    if active_override:
+        day_to_fetch = active_override["target_day"]
 
     core_query = schedule_items_table.select().where(
         sqlalchemy.and_(
