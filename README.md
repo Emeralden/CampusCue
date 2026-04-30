@@ -13,7 +13,7 @@ This repository is structured as a **Full-Stack Project** with a clear separatio
 
 ---
 
-## The Backend (My Original Work)
+## The Backend (Original Work)
 
 The core of this project is a professional-grade backend API built from the ground up with **FastAPI** and **SQLAlchemy**. This is the application's single source of truth, handling all data management, business logic, and security.
 
@@ -37,7 +37,7 @@ This entire backend was architected and built by me from scratch, demonstrating 
 
 ## The Frontend (Scaffolded & Refactored Client)
 
-The frontend is a **React PWA**, originally scaffolded using the Base44 platform. Its role in this project is to serve as a tangible, real-world client that consumes and showcases the power of the backend API I built.
+The frontend is a **React PWA**, originally scaffolded using LLMs. Its role in this project is to serve as a tangible, real-world client that consumes and showcases the power of the backend API I built.
 
 **My Contribution:** 
 *   **Full API Integration:** I integrated the frontend with the backend by implementing all the necessary API calls, transforming it from a static mock-up into a dynamic, data-driven application.
