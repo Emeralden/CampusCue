@@ -1,5 +1,12 @@
 # CampusCue - A Full-Stack College Companion App
 
+
+[![Live App](https://img.shields.io/badge/Live-App-brightgreen?style=for-the-badge)](https://campuscue-web.vercel.app/)
+[![API Docs](https://img.shields.io/badge/API-Docs-blue?style=for-the-badge)](https://campuscue.onrender.com/docs)
+
+<img width="1354" height="485" alt="Airbrush-image-extender" src="https://github.com/user-attachments/assets/003a59e0-312e-497d-b024-4bb06a74ec65" />
+
+
 Welcome to the official repository for CampusCue, the all-in-one companion app designed for students at IIT Bhilai. This project showcases a complete, professional-grade application featuring a robust Python backend built from scratch and a real-world React frontend client.
 
 ---
@@ -13,7 +20,7 @@ This repository is structured as a **Full-Stack Project** with a clear separatio
 
 ---
 
-## The Backend (My Original Work)
+## The Backend
 
 The core of this project is a professional-grade backend API built from the ground up with **FastAPI** and **SQLAlchemy**. This is the application's single source of truth, handling all data management, business logic, and security.
 
@@ -35,14 +42,17 @@ This entire backend was architected and built by me from scratch, demonstrating 
 
 ---
 
-## The Frontend (Scaffolded & Refactored Client)
+## The Frontend
 
-The frontend is a **React PWA**, originally scaffolded using the Base44 platform. Its role in this project is to serve as a tangible, real-world client that consumes and showcases the power of the backend API I built.
+The frontend is a **React PWA** whose initial visual scaffolding and component styling were accelerated using LLM-assisted generation. Then, the application logic, architecture, integration, and productionization were implemented and refined by me.
 
-**My Contribution:** 
-*   **Full API Integration:** I integrated the frontend with the backend by implementing all the necessary API calls, transforming it from a static mock-up into a dynamic, data-driven application.
-*   **UX/UI Redesign:** I personally redesigned the entire navigation flow, de-cluttering the UI and implementing a more intuitive, context-aware user experience.
-*   **Native Mobile Deployment:** Packaged the entire React application into a native **Android App** using **Capacitor** and set up a private beta distribution channel using **Firebase App Distribution**.
+### My Contributions:
+
+* **Full Backend Integration:** Implemented and connected all frontend API interactions, transforming the UI from static mockups into a fully functional, data-driven application.
+* **Frontend Engineering:** Structured client-side state management, asynchronous data fetching, authentication flows, token refresh handling, and protected routing.
+* **UX/UI Redesign & Refinement:** Reworked the navigation flow, decluttered screens, improved responsiveness, and redesigned several interaction patterns for a cleaner and more intuitive user experience.
+* **PWA & Mobile Packaging:** Configured the application as a Progressive Web App and packaged it into a native **Android app** using **Capacitor**.
+* **Deployment & Distribution:** Set up deployment pipelines and distributed mobile beta builds through **Firebase App Distribution**.
 
 ---
 
