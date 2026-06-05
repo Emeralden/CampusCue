@@ -1,5 +1,5 @@
-from pydantic import BaseModel, computed_field
-from datetime import date, time
+from pydantic import BaseModel, model_validator, ConfigDict
+from datetime import date, time as time_type
 from typing import List
 
 class ScheduleOverride(BaseModel):
@@ -11,16 +11,16 @@ class ScheduleItem(BaseModel):
     item_type: str
     name: str
     room: str
-    start_time: time
-    end_time: time
+    start_time: time_type
+    end_time: time_type
+    time: str = ""
 
-    @computed_field
-    @property
-    def time(self) -> str:
-        return f"{self.start_time.strftime('%H:%M')}-{self.end_time.strftime('%H:%M')}"
+    model_config = ConfigDict(from_attributes=True)
 
-    class Config:
-        from_attributes = True
+    @model_validator(mode='after')
+    def compute_time(self) -> 'ScheduleItem':
+        self.time = f"{self.start_time.strftime('%H:%M')}-{self.end_time.strftime('%H:%M')}"
+        return self
 
 class CourseSubscription(BaseModel):
     schedule_item_ids: List[int]
