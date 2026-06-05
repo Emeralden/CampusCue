@@ -3,10 +3,10 @@ import sqlalchemy
 from fastapi import APIRouter, Depends, status
 from typing import List
 
-from ..database import database, satisfaction_logs_table
-from ..models.satisfaction import SatisfactionLogCreate, SatisfactionLog
-from ..models.user import User
-from ..security import get_current_user
+from database import database, satisfaction_logs_table
+from models.satisfaction import SatisfactionLogCreate, SatisfactionLog
+from models.user import User
+from security import get_current_user
 
 router = APIRouter()
 logger = logging.getLogger(__name__)

@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from .routers import user,mess, schedule, satisfaction
-from .database import database
+from routers import user,mess, schedule, satisfaction
+from database import database
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 

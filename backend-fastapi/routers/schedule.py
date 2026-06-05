@@ -5,20 +5,20 @@ from typing import List
 import sqlalchemy
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 
-from ..database import (
+from database import (
     database,
     schedule_items_table,
     schedule_overrides_table,
     user_schedule_table,
 )
-from ..models.schedule import (
+from models.schedule import (
     CourseSubscription,
     DailyScheduleResponse,
     ScheduleItem,
     ScheduleOverride,
 )
-from ..models.user import User
-from ..security import get_current_user
+from models.user import User
+from security import get_current_user
 
 router = APIRouter()
 logger = logging.getLogger(__name__)

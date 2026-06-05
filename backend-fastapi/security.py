@@ -9,8 +9,8 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 
-from .config import settings
-from .database import database, users_table
+from config import settings
+from database import database, users_table
 
 credentials_exception = HTTPException(
     status_code=status.HTTP_401_UNAUTHORIZED,

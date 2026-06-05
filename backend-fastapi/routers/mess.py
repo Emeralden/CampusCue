@@ -3,11 +3,11 @@ import sqlalchemy
 from datetime import datetime
 from fastapi import APIRouter, Depends, Query
 from typing import List
-from ..models.mess import MessMenuItem
+from models.mess import MessMenuItem
 
-from ..database import database, mess_menu_items_table
-from ..models.user import User
-from ..security import get_current_user
+from database import database, mess_menu_items_table
+from models.user import User
+from security import get_current_user
 
 router = APIRouter()
 
