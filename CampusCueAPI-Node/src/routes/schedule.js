@@ -36,7 +36,8 @@ async function buildScheduleForDay(user, dayOfWeek) {
 // ─── GET /schedule/subscriptions ─────────────────────────────────────────────
 
 router.get('/subscriptions', authenticate, (req, res) => {
-  return res.json(req.user.subscribed_schedules);
+  // Return string IDs so frontend .includes() comparisons work with item.id strings
+  return res.json(req.user.subscribed_schedules.map(id => id.toString()));
 });
 
 // ─── POST /schedule/subscriptions ────────────────────────────────────────────

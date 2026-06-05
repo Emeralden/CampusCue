@@ -10,4 +10,13 @@ const SatisfactionLogSchema = new mongoose.Schema({
 
 SatisfactionLogSchema.index({ user_id: 1, log_date: 1 }, { unique: true });
 
+SatisfactionLogSchema.set('toJSON', {
+  transform: (_doc, ret) => {
+    ret.id = ret._id.toString();
+    delete ret._id;
+    delete ret.__v;
+    return ret;
+  },
+});
+
 module.exports = mongoose.model('SatisfactionLog', SatisfactionLogSchema);

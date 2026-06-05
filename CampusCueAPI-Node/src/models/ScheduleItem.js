@@ -10,4 +10,14 @@ const ScheduleItemSchema = new mongoose.Schema({
   end_time:    { type: String, required: true },
 });
 
+// Normalize _id → id, strip __v for all responses
+ScheduleItemSchema.set('toJSON', {
+  transform: (_doc, ret) => {
+    ret.id = ret._id.toString();
+    delete ret._id;
+    delete ret.__v;
+    return ret;
+  },
+});
+
 module.exports = mongoose.model('ScheduleItem', ScheduleItemSchema);

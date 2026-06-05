@@ -18,4 +18,15 @@ const UserSchema = new mongoose.Schema({
   subscribed_schedules: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ScheduleItem' }],
 });
 
+UserSchema.set('toJSON', {
+  transform: (_doc, ret) => {
+    ret.id = ret._id.toString();
+    delete ret._id;
+    delete ret.__v;
+    delete ret.hashed_password;
+    delete ret.hashed_refresh_token;
+    return ret;
+  },
+});
+
 module.exports = mongoose.model('User', UserSchema);
