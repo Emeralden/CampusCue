@@ -13,6 +13,7 @@ from ..security import (
     get_current_user_from_refresh_token,
     get_password_hash,
     get_user,
+    hash_refresh_token,
 )
 
 router = APIRouter()
@@ -54,7 +55,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     access_token = create_access_token(data={"sub": user["email"]})
     refresh_token = create_refresh_token(data={"sub": user["email"]})
 
-    hashed_refresh_token = get_password_hash(refresh_token)
+    hashed_refresh_token = hash_refresh_token(refresh_token)
     update_query = (
         users_table.update()
         .where(users_table.c.id == user["id"])

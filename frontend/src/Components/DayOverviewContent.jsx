@@ -38,17 +38,17 @@ export default function DayOverviewContent({ dayOffset = 0, showTimeAndStatus = 
   const { data: menuData, isLoading: isMenuLoading, isError: isMenuError } = useQuery({
     queryKey: ['myMenu', dateStr],
     queryFn: () => fetchMyMenu(dateStr),
-    refetchOnWindowFocus: true,
-    staleTime: 5 * 60 * 1000,
-    refetchInterval: 60 * 1000,
+    refetchOnWindowFocus: false,
+    staleTime: 10 * 60 * 1000,
+    gcTime: 15 * 60 * 1000,
   });
 
   const { data: scheduleData, isLoading: isScheduleLoading, isError: isScheduleError } = useQuery({
     queryKey: ['mySchedule', dateStr],
     queryFn: () => fetchMySchedule(dateStr),
-    refetchOnWindowFocus: true,
-    staleTime: 5 * 60 * 1000,
-    refetchInterval: 60 * 1000,
+    refetchOnWindowFocus: false,
+    staleTime: 10 * 60 * 1000,
+    gcTime: 15 * 60 * 1000,
   });
 
   React.useEffect(() => {

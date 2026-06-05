@@ -1,3 +1,4 @@
+import hashlib
 import logging
 from datetime import datetime, timedelta, timezone
 from typing import Annotated
@@ -81,6 +82,16 @@ def create_refresh_token(data: dict):
     return encoded_jwt
 
 
+def hash_refresh_token(token: str) -> str:
+    """Fast SHA-256 hash for refresh tokens (not user passwords)."""
+    return hashlib.sha256(token.encode()).hexdigest()
+
+
+def verify_refresh_token(token: str, hashed: str) -> bool:
+    """Constant-time comparison to prevent timing attacks."""
+    return hashlib.compare_digest(hash_refresh_token(token), hashed)
+
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/users/token")
 
 
@@ -125,7 +136,7 @@ async def get_current_user_from_refresh_token(token: str):
     if user is None:
         raise credentials_exception
 
-    if not verify_password(token, user["hashed_refresh_token"]):
+    if not verify_refresh_token(token, user["hashed_refresh_token"]):
         raise credentials_exception
 
     return user

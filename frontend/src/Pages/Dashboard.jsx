@@ -22,14 +22,19 @@ export default function Dashboard() {
   const { data: currentUser } = useQuery({
   queryKey: ['currentUser'],
   queryFn: async () => (await apiClient.get('/users/me')).data,
+  staleTime: 10 * 60 * 1000,
+  gcTime: 15 * 60 * 1000,
+  refetchOnWindowFocus: false,
   });
 
   const { data: allLogs = [] } = useQuery({
     queryKey: ['satisfactionHistory'],
     queryFn: fetchSatisfactionHistory,
     enabled: !!currentUser?.enable_satisfaction_prompt,
-    refetchInterval: 2 * 60 * 1000,
-    staleTime: 2 * 60 * 1000,
+    refetchInterval: 5 * 60 * 1000,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+    refetchOnWindowFocus: false,
     retry: 1,
   });
 
