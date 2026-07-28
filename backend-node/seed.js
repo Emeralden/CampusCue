@@ -1,7 +1,7 @@
 /**
  * seed.js — Seeds reference data into MongoDB Atlas from shared JSON files.
  * Run: node seed.js
- * Safe to re-run — skips if data already exists.
+ * Always wipes & re-inserts to pick up any changes in the shared JSON files.
  */
 
 require('dotenv').config();
@@ -19,22 +19,14 @@ async function seed() {
   console.log('✅ Connected to MongoDB');
 
   // ── Mess Menu ─────────────────────────────────────────────────────────────
-  const menuCount = await MessMenuItem.countDocuments();
-  if (menuCount === 0) {
-    const result = await MessMenuItem.insertMany(MENU_DATA);
-    console.log(`✅ Inserted ${result.length} mess menu items`);
-  } else {
-    console.log(`⏭️  Mess menu already seeded (${menuCount} items) — skipping`);
-  }
+  await MessMenuItem.deleteMany({});
+  const menuResult = await MessMenuItem.insertMany(MENU_DATA);
+  console.log(`✅ Inserted ${menuResult.length} mess menu items`);
 
   // ── Schedule Items ────────────────────────────────────────────────────────
-  const schedCount = await ScheduleItem.countDocuments();
-  if (schedCount === 0) {
-    const result = await ScheduleItem.insertMany(SCHEDULE_DATA);
-    console.log(`✅ Inserted ${result.length} schedule items`);
-  } else {
-    console.log(`⏭️  Schedule already seeded (${schedCount} items) — skipping`);
-  }
+  await ScheduleItem.deleteMany({});
+  const schedResult = await ScheduleItem.insertMany(SCHEDULE_DATA);
+  console.log(`✅ Inserted ${schedResult.length} schedule items`);
 
   await mongoose.disconnect();
   console.log('🎉 Seeding complete!');
