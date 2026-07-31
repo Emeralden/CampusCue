@@ -4,7 +4,7 @@
     "day_of_week": "monday",
     "meal_type": "breakfast",
     "menu_type": "veg",
-    "description": "Methi Paratha / Palak Paratha + Chana Masala + Banana"
+    "description": "Aaloo Paratha + Tomato Chutney + Sauce + Curd + Banana"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -18,14 +18,14 @@
     "day_of_week": "monday",
     "meal_type": "dinner",
     "menu_type": "veg",
-    "description": "Mushroom + Gulab Jamun"
+    "description": "kadai paneer + Moong Dal halwa"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "tuesday",
     "meal_type": "breakfast",
     "menu_type": "veg",
-    "description": "Suji Upma + Coconut Chutney + Chick Pea Salad"
+    "description": "Suji Upma + Coconut Chutney + Veg Sandwich + Chick Pea Salad"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -39,91 +39,91 @@
     "day_of_week": "tuesday",
     "meal_type": "dinner",
     "menu_type": "veg",
-    "description": "Drum Stick + Custard"
+    "description": "Bitter Gourd + Dal Makhni + Custard"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "wednesday",
     "meal_type": "breakfast",
     "menu_type": "veg",
-    "description": "Allo Paratha + Tomato Chutney + Curd + Banana"
+    "description": "Besan Chilla + Chana ki sabji + Banana"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "wednesday",
     "meal_type": "lunch",
     "menu_type": "veg",
-    "description": "Bitter Gourd"
+    "description": "Soya Mutter"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "wednesday",
     "meal_type": "dinner",
     "menu_type": "veg",
-    "description": "MutterPaneer + Moong dal Halwa"
+    "description": "MutterPaneer + Gulab Jamun"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "thursday",
     "meal_type": "breakfast",
     "menu_type": "veg",
-    "description": "Namkin Poori + Aaloo Chana + Chick Pea Salad"
+    "description": "Methi Poori + Aaloo Chana + Banana"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "thursday",
     "meal_type": "lunch",
     "menu_type": "veg",
-    "description": "Sponge Guord Sabji(Nenua)"
+    "description": "Mix-Veg + Rjama daal"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "thursday",
     "meal_type": "dinner",
     "menu_type": "veg",
-    "description": "Bhindi Masala + Sewai"
+    "description": "Brinjal + Sewai"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "friday",
     "meal_type": "breakfast",
     "menu_type": "veg",
-    "description": "idli+ Medu vada + Sambhar + Tomato Chutney + Banana"
+    "description": "idli+ Medu vada + Sambhar + Tomato Chutney + Chikpea Salad with Peanut"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "friday",
     "meal_type": "lunch",
     "menu_type": "veg",
-    "description": "Mix-Veg + Rasam"
+    "description": "Bhindi Masala + Rasam"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "friday",
     "meal_type": "dinner",
     "menu_type": "veg",
-    "description": "Soya Chaap + Jalebi"
+    "description": "Mashroom Mutter + Jalebi"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "saturday",
     "meal_type": "breakfast",
     "menu_type": "veg",
-    "description": "Poha + Chick pea Chole+ Tomato cut+ Onion cut + Sev + Aloo Sandwich + Banana"
+    "description": "Poha+SevPoha + Tomato cut+ Onion cut + Sev + Aloo Sandwich + Banana"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "saturday",
     "meal_type": "lunch",
     "menu_type": "veg",
-    "description": "Chole + Lemon Rice + Bhature"
+    "description": "Chole + Veg pulao + Bhature"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "saturday",
     "meal_type": "dinner",
     "menu_type": "veg",
-    "description": "Boiled Tomato Chutney + Mix Dal Khichdi + Sabu Dana Kheer"
+    "description": "Parval (pointed gourd) + Aaloo + Sabu Dana Kheer"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -137,7 +137,7 @@
     "day_of_week": "sunday",
     "meal_type": "lunch",
     "menu_type": "veg",
-    "description": "Kathal"
+    "description": "Aloo Mutter Dry + Sambhar"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -151,7 +151,7 @@
     "day_of_week": "monday",
     "meal_type": "breakfast",
     "menu_type": "non_veg",
-    "description": "Methi Paratha / Palak Paratha + Chana Masala + Boiled Egg"
+    "description": "Aaloo Paratha + Tomato Chutney + Sauce + Curd + Boiled egg"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -165,14 +165,14 @@
     "day_of_week": "monday",
     "meal_type": "dinner",
     "menu_type": "non_veg",
-    "description": "Mushroom + Gulab Jamun"
+    "description": "kadai paneer + Moong Dal halwa"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "tuesday",
     "meal_type": "breakfast",
     "menu_type": "non_veg",
-    "description": "Suji Upma + Coconut Chutney + Chick Pea Salad"
+    "description": "Suji Upma + Coconut Chutney + Veg Sandwich + Chick Pea Salad"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -186,63 +186,63 @@
     "day_of_week": "tuesday",
     "meal_type": "dinner",
     "menu_type": "non_veg",
-    "description": "Drum Stick + Custard"
+    "description": "Bitter Gourd + Dal Makhni + Custard"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "wednesday",
     "meal_type": "breakfast",
     "menu_type": "non_veg",
-    "description": "Allo Paratha + Tomato Chutney + Curd + Omlette"
+    "description": "Besan Chilla + Chana ki sabji + Boiled Egg"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "wednesday",
     "meal_type": "lunch",
     "menu_type": "non_veg",
-    "description": "Bitter Gourd"
+    "description": "Soya Mutter"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "wednesday",
     "meal_type": "dinner",
     "menu_type": "non_veg",
-    "description": "CHICKEN CURRY + Moong dal Halwa"
+    "description": "CHICKEN CURRY + Gulab Jamun"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "thursday",
     "meal_type": "breakfast",
     "menu_type": "non_veg",
-    "description": "Namkin Poori + Aaloo Chana + Chick Pea Salad"
+    "description": "Methi Poori + Aaloo Chana + Egg Bhurji"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "thursday",
     "meal_type": "lunch",
     "menu_type": "non_veg",
-    "description": "Sponge Guord Sabji(Nenua)"
+    "description": "Mix-Veg + Rjama daal"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "thursday",
     "meal_type": "dinner",
     "menu_type": "non_veg",
-    "description": "Bhindi Masala + Sewai"
+    "description": "Brinjal + Sewai"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "friday",
     "meal_type": "breakfast",
     "menu_type": "non_veg",
-    "description": "idli+ Medu vada + Sambhar + Tomato Chutney + Banana"
+    "description": "idli+ Medu vada + Sambhar + Tomato Chutney + Chikpea Salad with Peanut"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "friday",
     "meal_type": "lunch",
     "menu_type": "non_veg",
-    "description": "Mix-Veg + Rasam"
+    "description": "Bhindi Masala + Rasam"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -256,21 +256,21 @@
     "day_of_week": "saturday",
     "meal_type": "breakfast",
     "menu_type": "non_veg",
-    "description": "Poha + Chick pea Chole+ Tomato cut+ Onion cut + Sev + Aloo Sandwich + Egg Bhurji"
+    "description": "Poha+SevPoha + Tomato cut+ Onion cut + Sev + Aloo Sandwich + Boiled Egg"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "saturday",
     "meal_type": "lunch",
     "menu_type": "non_veg",
-    "description": "Chole + Lemon Rice + Bhature"
+    "description": "Chole + Veg pulao + Bhature"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "saturday",
     "meal_type": "dinner",
     "menu_type": "non_veg",
-    "description": "Boiled Tomato Chutney + Mix Dal Khichdi + Sabu Dana Kheer"
+    "description": "Parval (pointed gourd) + Aaloo + Sabu Dana Kheer"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -284,7 +284,7 @@
     "day_of_week": "sunday",
     "meal_type": "lunch",
     "menu_type": "non_veg",
-    "description": "Kathal"
+    "description": "Aloo Mutter Dry + Sambhar"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -298,7 +298,7 @@
     "day_of_week": "monday",
     "meal_type": "breakfast",
     "menu_type": "egg",
-    "description": "Methi Paratha / Palak Paratha + Chana Masala + Boiled Egg"
+    "description": "Aaloo Paratha + Tomato Chutney + Sauce + Curd + Boiled egg"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -312,14 +312,14 @@
     "day_of_week": "monday",
     "meal_type": "dinner",
     "menu_type": "egg",
-    "description": "Mushroom + Gulab Jamun"
+    "description": "kadai paneer + Moong Dal halwa"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "tuesday",
     "meal_type": "breakfast",
     "menu_type": "egg",
-    "description": "Suji Upma + Coconut Chutney + Chick Pea Salad"
+    "description": "Suji Upma + Coconut Chutney + Veg Sandwich + Chick Pea Salad"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -333,63 +333,63 @@
     "day_of_week": "tuesday",
     "meal_type": "dinner",
     "menu_type": "egg",
-    "description": "Drum Stick + Custard"
+    "description": "Bitter Gourd + Dal Makhni + Custard"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "wednesday",
     "meal_type": "breakfast",
     "menu_type": "egg",
-    "description": "Allo Paratha + Tomato Chutney + Curd + Omlette"
+    "description": "Besan Chilla + Chana ki sabji + Boiled Egg"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "wednesday",
     "meal_type": "lunch",
     "menu_type": "egg",
-    "description": "Bitter Gourd"
+    "description": "Soya Mutter"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "wednesday",
     "meal_type": "dinner",
     "menu_type": "egg",
-    "description": "MutterPaneer + Moong dal Halwa"
+    "description": "MutterPaneer + Gulab Jamun"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "thursday",
     "meal_type": "breakfast",
     "menu_type": "egg",
-    "description": "Namkin Poori + Aaloo Chana + Chick Pea Salad"
+    "description": "Methi Poori + Aaloo Chana + Egg Bhurji"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "thursday",
     "meal_type": "lunch",
     "menu_type": "egg",
-    "description": "Sponge Guord Sabji(Nenua)"
+    "description": "Mix-Veg + Rjama daal"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "thursday",
     "meal_type": "dinner",
     "menu_type": "egg",
-    "description": "Bhindi Masala + Sewai"
+    "description": "Brinjal + Sewai"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "friday",
     "meal_type": "breakfast",
     "menu_type": "egg",
-    "description": "idli+ Medu vada + Sambhar + Tomato Chutney + Banana"
+    "description": "idli+ Medu vada + Sambhar + Tomato Chutney + Chikpea Salad with Peanut"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "friday",
     "meal_type": "lunch",
     "menu_type": "egg",
-    "description": "Mix-Veg + Rasam"
+    "description": "Bhindi Masala + Rasam"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -403,21 +403,21 @@
     "day_of_week": "saturday",
     "meal_type": "breakfast",
     "menu_type": "egg",
-    "description": "Poha + Chick pea Chole+ Tomato cut+ Onion cut + Sev + Aloo Sandwich + Egg Bhurji"
+    "description": "Poha+SevPoha + Tomato cut+ Onion cut + Sev + Aloo Sandwich + Boiled Egg"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "saturday",
     "meal_type": "lunch",
     "menu_type": "egg",
-    "description": "Chole + Lemon Rice + Bhature"
+    "description": "Chole + Veg pulao + Bhature"
   },
   {
     "cycle_type": "weeks_1_3",
     "day_of_week": "saturday",
     "meal_type": "dinner",
     "menu_type": "egg",
-    "description": "Boiled Tomato Chutney + Mix Dal Khichdi + Sabu Dana Kheer"
+    "description": "Parval (pointed gourd) + Aaloo + Sabu Dana Kheer"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -431,7 +431,7 @@
     "day_of_week": "sunday",
     "meal_type": "lunch",
     "menu_type": "egg",
-    "description": "Kathal"
+    "description": "Aloo Mutter Dry + Sambhar"
   },
   {
     "cycle_type": "weeks_1_3",
@@ -445,14 +445,14 @@
     "day_of_week": "monday",
     "meal_type": "breakfast",
     "menu_type": "veg",
-    "description": "Gobi Paratha +Dahi+ Corriander Tomato Chutney + Banana"
+    "description": "Gobi Paratha +Curd+ Corriander Tomato Chutney + Banana"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "monday",
     "meal_type": "lunch",
     "menu_type": "veg",
-    "description": "Bhindi Masala + Rasam"
+    "description": "Kunru sabji + Rasam"
   },
   {
     "cycle_type": "weeks_2_4",
@@ -466,28 +466,28 @@
     "day_of_week": "tuesday",
     "meal_type": "breakfast",
     "menu_type": "veg",
-    "description": "Uttapam +Coconut Chutney+Sambhar + Banana"
+    "description": "Uttapam + Coconut Chutney + Sambhar + Chick Pea Salad"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "tuesday",
     "meal_type": "lunch",
     "menu_type": "veg",
-    "description": "Spinach Tomato Sabji"
+    "description": "Cabbage Mutter"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "tuesday",
     "meal_type": "dinner",
     "menu_type": "veg",
-    "description": "Kaddu + Gulab Jamun"
+    "description": "Besan patodi + Sewai"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "wednesday",
     "meal_type": "breakfast",
     "menu_type": "veg",
-    "description": "Puri+Sabji (Aloo+ Chana) + Chick Pea Salad"
+    "description": "Puri+Sabji (Aloo+ Chana) + veg Sandwich + Banana"
   },
   {
     "cycle_type": "weeks_2_4",
@@ -501,63 +501,63 @@
     "day_of_week": "wednesday",
     "meal_type": "dinner",
     "menu_type": "veg",
-    "description": "Butter Paneer + Moong Dal Halwa"
+    "description": "Buttter Paneer + Gulab Jamun"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "thursday",
     "meal_type": "breakfast",
     "menu_type": "veg",
-    "description": "Sewai Upma + Coconut Chutney + Aloo Sandwich + Banana"
+    "description": "Idli+ Medu vada + Sambhar + Tomato Chutney + Banana"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "thursday",
     "meal_type": "lunch",
     "menu_type": "veg",
-    "description": "Kundru + Sambhar"
+    "description": "Soya Mutter"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "thursday",
     "meal_type": "dinner",
     "menu_type": "veg",
-    "description": "Parval Aloo + Sewai"
+    "description": "Spiny gourd bhujia + Dahi Vada"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "friday",
+    "meal_type": "breakfast",
+    "menu_type": "veg",
+    "description": "Appe + coconut chutney + Aloo Sandwich + Chikpea Salad with Peanut"
+  },
+  {
+    "cycle_type": "weeks_2_4",
+    "day_of_week": "friday",
+    "meal_type": "lunch",
+    "menu_type": "veg",
+    "description": "Lauki+chana + Rajma Dal"
+  },
+  {
+    "cycle_type": "weeks_2_4",
+    "day_of_week": "friday",
+    "meal_type": "dinner",
+    "menu_type": "veg",
+    "description": "Sahi Paneer + Moong Dal Halwa"
+  },
+  {
+    "cycle_type": "weeks_2_4",
+    "day_of_week": "saturday",
     "meal_type": "breakfast",
     "menu_type": "veg",
     "description": "Moong Dal Chila + Chana Sabji + Banana"
   },
   {
     "cycle_type": "weeks_2_4",
-    "day_of_week": "friday",
-    "meal_type": "lunch",
-    "menu_type": "veg",
-    "description": "Lauki"
-  },
-  {
-    "cycle_type": "weeks_2_4",
-    "day_of_week": "friday",
-    "meal_type": "dinner",
-    "menu_type": "veg",
-    "description": "Soya Chap + Jalebi"
-  },
-  {
-    "cycle_type": "weeks_2_4",
-    "day_of_week": "saturday",
-    "meal_type": "breakfast",
-    "menu_type": "veg",
-    "description": "Poha + Chole + Onion cut + Tomato cut + Banana"
-  },
-  {
-    "cycle_type": "weeks_2_4",
     "day_of_week": "saturday",
     "meal_type": "lunch",
     "menu_type": "veg",
-    "description": "Chole + Lemon Rice + Bhature"
+    "description": "Chole + Veg Pulao + Bhature"
   },
   {
     "cycle_type": "weeks_2_4",
@@ -571,7 +571,7 @@
     "day_of_week": "sunday",
     "meal_type": "breakfast",
     "menu_type": "veg",
-    "description": "Millet Dosa + Cocout Chutney+Sambhar + Germinated Sprouts"
+    "description": "Masala dosa + Peanut Chutney + sambhar + Banana"
   },
   {
     "cycle_type": "weeks_2_4",
@@ -585,21 +585,21 @@
     "day_of_week": "sunday",
     "meal_type": "dinner",
     "menu_type": "veg",
-    "description": "Veg Biryani + Flavoured Ice Cream"
+    "description": "Veg Biryani + mix veg Raita + Flavoured Ice Cream"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "monday",
     "meal_type": "breakfast",
     "menu_type": "non_veg",
-    "description": "Gobi Paratha +Dahi+ Corriander Tomato Chutney + Boiled Egg"
+    "description": "Gobi Paratha +Curd+ Corriander Tomato Chutney + Boiled Egg"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "monday",
     "meal_type": "lunch",
     "menu_type": "non_veg",
-    "description": "Bhindi Masala + Rasam"
+    "description": "Kunru sabji + Rasam"
   },
   {
     "cycle_type": "weeks_2_4",
@@ -613,98 +613,98 @@
     "day_of_week": "tuesday",
     "meal_type": "breakfast",
     "menu_type": "non_veg",
-    "description": "Uttapam +Coconut Chutney+Sambhar + Banana"
+    "description": "Uttapam + Coconut Chutney + Sambhar + Chick Pea Salad"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "tuesday",
     "meal_type": "lunch",
     "menu_type": "non_veg",
-    "description": "Spinach Tomato Sabji"
+    "description": "Cabbage Mutter"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "tuesday",
     "meal_type": "dinner",
     "menu_type": "non_veg",
-    "description": "Kaddu + Gulab Jamun"
+    "description": "Besan patodi + Sewai"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "wednesday",
     "meal_type": "breakfast",
     "menu_type": "non_veg",
-    "description": "Puri+Sabji (Aloo+ Chana) + Chick Pea Salad"
+    "description": "Puri+Sabji (Aloo+ Chana) + veg Sandwich + Omelette"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "wednesday",
     "meal_type": "lunch",
     "menu_type": "non_veg",
-    "description": "Sponge Gourd (Nenua) + Dal Makhani"
+    "description": "Sponge Gourd (Nenua) + Dal Makhni"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "wednesday",
     "meal_type": "dinner",
     "menu_type": "non_veg",
-    "description": "Butter Chicken + Moong Dal Halwa"
+    "description": "Butter Chicken + Gulab Jamun"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "thursday",
     "meal_type": "breakfast",
     "menu_type": "non_veg",
-    "description": "Sewai Upma + Coconut Chutney + Aloo Sandwich + Omlette"
+    "description": "Idli+ Medu vada + Sambhar + Tomato Chutney + Egg Bhurji"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "thursday",
     "meal_type": "lunch",
     "menu_type": "non_veg",
-    "description": "Kundru + Sambhar"
+    "description": "Soya Mutter"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "thursday",
     "meal_type": "dinner",
     "menu_type": "non_veg",
-    "description": "Parval Aloo + Sewai"
+    "description": "Spiny gourd bhujia + Dahi Vada"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "friday",
     "meal_type": "breakfast",
     "menu_type": "non_veg",
-    "description": "Moong Dal Chila + Chana Sabji + Banana"
+    "description": "Appe + coconut chutney + Aloo Sandwich + Chikpea Salad with Peanut"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "friday",
     "meal_type": "lunch",
     "menu_type": "non_veg",
-    "description": "Lauki"
+    "description": "Lauki+chana + Rajma Dal"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "friday",
     "meal_type": "dinner",
     "menu_type": "non_veg",
-    "description": "Fish Curry + Jalebi"
+    "description": "Fish Curry + Moong Dal Halwa"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "saturday",
     "meal_type": "breakfast",
     "menu_type": "non_veg",
-    "description": "Poha + Chole + Onion cut + Tomato cut + Egg Bhuri"
+    "description": "Moong Dal Chila + Chana Sabji + Egg Bhurji"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "saturday",
     "meal_type": "lunch",
     "menu_type": "non_veg",
-    "description": "Chole + Lemon Rice + Bhature"
+    "description": "Chole + Veg Pulao + Bhature"
   },
   {
     "cycle_type": "weeks_2_4",
@@ -718,7 +718,7 @@
     "day_of_week": "sunday",
     "meal_type": "breakfast",
     "menu_type": "non_veg",
-    "description": "Millet Dosa + Cocout Chutney+Sambhar + Germinated Sprouts"
+    "description": "Masala dosa + Peanut Chutney + sambhar + Boiled Egg"
   },
   {
     "cycle_type": "weeks_2_4",
@@ -732,21 +732,21 @@
     "day_of_week": "sunday",
     "meal_type": "dinner",
     "menu_type": "non_veg",
-    "description": "CHICKEN BIRYANI + Flavoured Ice Cream"
+    "description": "CHICKEN BIRYANI + mix veg Raita + Flavoured Ice Cream"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "monday",
     "meal_type": "breakfast",
     "menu_type": "egg",
-    "description": "Gobi Paratha +Dahi+ Corriander Tomato Chutney + Boiled Egg"
+    "description": "Gobi Paratha +Curd+ Corriander Tomato Chutney + Boiled Egg"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "monday",
     "meal_type": "lunch",
     "menu_type": "egg",
-    "description": "Bhindi Masala + Rasam"
+    "description": "Kunru sabji + Rasam"
   },
   {
     "cycle_type": "weeks_2_4",
@@ -760,98 +760,98 @@
     "day_of_week": "tuesday",
     "meal_type": "breakfast",
     "menu_type": "egg",
-    "description": "Uttapam +Coconut Chutney+Sambhar + Banana"
+    "description": "Uttapam + Coconut Chutney + Sambhar + Chick Pea Salad"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "tuesday",
     "meal_type": "lunch",
     "menu_type": "egg",
-    "description": "Spinach Tomato Sabji"
+    "description": "Cabbage Mutter"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "tuesday",
     "meal_type": "dinner",
     "menu_type": "egg",
-    "description": "Kaddu + Gulab Jamun"
+    "description": "Besan patodi + Sewai"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "wednesday",
     "meal_type": "breakfast",
     "menu_type": "egg",
-    "description": "Puri+Sabji (Aloo+ Chana) + Chick Pea Salad"
+    "description": "Puri+Sabji (Aloo+ Chana) + veg Sandwich + Omelette"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "wednesday",
     "meal_type": "lunch",
     "menu_type": "egg",
-    "description": "Sponge Gourd (Nenua) + Dal Makhani"
+    "description": "Sponge Gourd (Nenua) + Dal Makhni"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "wednesday",
     "meal_type": "dinner",
     "menu_type": "egg",
-    "description": "Butter Paneer + Moong Dal Halwa"
+    "description": "Buttter Paneer + Gulab Jamun"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "thursday",
     "meal_type": "breakfast",
     "menu_type": "egg",
-    "description": "Sewai Upma + Coconut Chutney + Aloo Sandwich + Omlette"
+    "description": "Idli+ Medu vada + Sambhar + Tomato Chutney + Egg Bhurji"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "thursday",
     "meal_type": "lunch",
     "menu_type": "egg",
-    "description": "Kundru + Sambhar"
+    "description": "Soya Mutter"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "thursday",
     "meal_type": "dinner",
     "menu_type": "egg",
-    "description": "Parval Aloo + Sewai"
+    "description": "Spiny gourd bhujia + Dahi Vada"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "friday",
     "meal_type": "breakfast",
     "menu_type": "egg",
-    "description": "Moong Dal Chila + Chana Sabji + Banana"
+    "description": "Appe + coconut chutney + Aloo Sandwich + Chikpea Salad with Peanut"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "friday",
     "meal_type": "lunch",
     "menu_type": "egg",
-    "description": "Lauki"
+    "description": "Lauki+chana + Rajma Dal"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "friday",
     "meal_type": "dinner",
     "menu_type": "egg",
-    "description": "Soya Chap + Jalebi"
+    "description": "Sahi Paneer + Moong Dal Halwa"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "saturday",
     "meal_type": "breakfast",
     "menu_type": "egg",
-    "description": "Poha + Chole + Onion cut + Tomato cut + Egg Bhuri"
+    "description": "Moong Dal Chila + Chana Sabji + Egg Bhurji"
   },
   {
     "cycle_type": "weeks_2_4",
     "day_of_week": "saturday",
     "meal_type": "lunch",
     "menu_type": "egg",
-    "description": "Chole + Lemon Rice + Bhature"
+    "description": "Chole + Veg Pulao + Bhature"
   },
   {
     "cycle_type": "weeks_2_4",
@@ -865,7 +865,7 @@
     "day_of_week": "sunday",
     "meal_type": "breakfast",
     "menu_type": "egg",
-    "description": "Millet Dosa + Cocout Chutney+Sambhar + Germinated Sprouts"
+    "description": "Masala dosa + Peanut Chutney + sambhar + Boiled Egg"
   },
   {
     "cycle_type": "weeks_2_4",
@@ -879,6 +879,6 @@
     "day_of_week": "sunday",
     "meal_type": "dinner",
     "menu_type": "egg",
-    "description": "Veg Biryani + Flavoured Ice Cream"
+    "description": "Veg Biryani + mix veg Raita + Flavoured Ice Cream"
   }
 ]
