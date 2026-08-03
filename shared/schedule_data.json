@@ -44,7 +44,7 @@
     "start_time": "08:30:00.000000",
     "end_time": "09:30:00.000000"
   },
-    {
+  {
     "day_of_week": "thursday",
     "item_type": "class",
     "course_type": "core",
@@ -56,38 +56,29 @@
   {
     "day_of_week": "monday",
     "item_type": "class",
-    "course_type": "elective",
-    "name": "CSD",
-    "room": "L101",
-    "start_time": "14:30:00.000000",
-    "end_time": "15:30:00.000000"
+    "course_type": "core",
+    "name": "Digital IC",
+    "room": "L104",
+    "start_time": "08:30:00.000000",
+    "end_time": "09:30:00.000000"
   },
   {
     "day_of_week": "wednesday",
     "item_type": "class",
-    "course_type": "elective",
-    "name": "CSD",
-    "room": "L101",
-    "start_time": "14:30:00.000000",
-    "end_time": "15:30:00.000000"
+    "course_type": "core",
+    "name": "Digital IC",
+    "room": "L104",
+    "start_time": "09:30:00.000000",
+    "end_time": "10:30:00.000000"
   },
   {
     "day_of_week": "friday",
     "item_type": "class",
-    "course_type": "elective",
-    "name": "CSD",
-    "room": "L101",
-    "start_time": "14:30:00.000000",
-    "end_time": "15:30:00.000000"
-  },
-  {
-    "day_of_week": "friday",
-    "item_type": "lab",
-    "course_type": "elective",
-    "name": "CSD",
-    "room": "Lab",
-    "start_time": "15:30:00.000000",
-    "end_time": "17:30:00.000000"
+    "course_type": "core",
+    "name": "Digital IC",
+    "room": "L104",
+    "start_time": "09:30:00.000000",
+    "end_time": "10:30:00.000000"
   },
   {
     "day_of_week": "monday",
@@ -115,7 +106,8 @@
     "room": "L201",
     "start_time": "12:30:00.000000",
     "end_time": "13:30:00.000000"
-  },{
+  },
+  {
     "day_of_week": "thursday",
     "item_type": "class",
     "course_type": "core",
@@ -123,6 +115,33 @@
     "room": "L201",
     "start_time": "12:30:00.000000",
     "end_time": "13:30:00.000000"
+  },
+  {
+    "day_of_week": "tuesday",
+    "item_type": "class",
+    "course_type": "core",
+    "name": "Electrodynamics",
+    "room": "L203",
+    "start_time": "09:30:00.000000",
+    "end_time": "10:30:00.000000"
+  },
+  {
+    "day_of_week": "wednesday",
+    "item_type": "class",
+    "course_type": "core",
+    "name": "Electrodynamics",
+    "room": "L203",
+    "start_time": "10:30:00.000000",
+    "end_time": "11:30:00.000000"
+  },
+  {
+    "day_of_week": "friday",
+    "item_type": "class",
+    "course_type": "core",
+    "name": "Electrodynamics",
+    "room": "L203",
+    "start_time": "10:30:00.000000",
+    "end_time": "11:30:00.000000"
   },
   {
     "day_of_week": "tuesday",
@@ -150,14 +169,5 @@
     "room": "ED1 212",
     "start_time": "15:30:00.000000",
     "end_time": "16:30:00.000000"
-  },
-    {
-    "day_of_week": "friday",
-    "item_type": "lab",
-    "course_type": "core",
-    "name": "Minor Project",
-    "room": "Lab",
-    "start_time": "09:30:00.000000",
-    "end_time": "12:30:00.000000"
   }
 ]
