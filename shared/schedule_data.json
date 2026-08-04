@@ -58,7 +58,7 @@
     "item_type": "class",
     "course_type": "core",
     "name": "Digital IC",
-    "room": "L104",
+    "room": "L101",
     "start_time": "08:30:00.000000",
     "end_time": "09:30:00.000000"
   },
@@ -67,7 +67,7 @@
     "item_type": "class",
     "course_type": "core",
     "name": "Digital IC",
-    "room": "L104",
+    "room": "L101",
     "start_time": "09:30:00.000000",
     "end_time": "10:30:00.000000"
   },
@@ -76,7 +76,7 @@
     "item_type": "class",
     "course_type": "core",
     "name": "Digital IC",
-    "room": "L104",
+    "room": "L101",
     "start_time": "09:30:00.000000",
     "end_time": "10:30:00.000000"
   },
@@ -103,7 +103,7 @@
     "item_type": "class",
     "course_type": "core",
     "name": "Stress & Coping",
-    "room": "L201",
+    "room": "L209",
     "start_time": "12:30:00.000000",
     "end_time": "13:30:00.000000"
   },
@@ -112,7 +112,7 @@
     "item_type": "class",
     "course_type": "core",
     "name": "Stress & Coping",
-    "room": "L201",
+    "room": "L209",
     "start_time": "12:30:00.000000",
     "end_time": "13:30:00.000000"
   },
@@ -121,7 +121,7 @@
     "item_type": "class",
     "course_type": "core",
     "name": "Electrodynamics",
-    "room": "L203",
+    "room": "L206",
     "start_time": "09:30:00.000000",
     "end_time": "10:30:00.000000"
   },
@@ -130,7 +130,7 @@
     "item_type": "class",
     "course_type": "core",
     "name": "Electrodynamics",
-    "room": "L203",
+    "room": "L206",
     "start_time": "10:30:00.000000",
     "end_time": "11:30:00.000000"
   },
@@ -139,7 +139,7 @@
     "item_type": "class",
     "course_type": "core",
     "name": "Electrodynamics",
-    "room": "L203",
+    "room": "L206",
     "start_time": "10:30:00.000000",
     "end_time": "11:30:00.000000"
   },
